@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Si tus 40,000 imágenes están dentro de verificaciontrailer/fotos, añádela:
+verificaciontrailer/fotos/
