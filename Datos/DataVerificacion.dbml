@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GAB_Irapuato" Class="DataVerificacionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:189.206.160.206,2352;Initial Catalog=GAB_Irapuato;Persist Security Info=True;User ID=sa;Encrypt=False" SettingsObjectName="Datos.Properties.Settings" SettingsPropertyName="GAB_IrapuatoConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tb_det_revision_trailer" Member="tb_det_revision_trailer">
+    <Type Name="tb_det_revision_trailer">
+      <Column Name="fecha" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="conse" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="responsable_captu" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="setpointini" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="numcaja" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="difusor" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="piso" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="cajacompleta" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="temprod1" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="temprod2" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="temprod3" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="temprod4" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="temprod5" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="temprod6" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="setpointfin" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="vidrayan" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="termino_carga" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="porcentaje" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="fechaini" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="conseini" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="anden" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posunodos" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="postrescuatro" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="poscincoseis" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="possieteocho" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posnuevediez" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posoncedoce" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="postrececatorce" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posquincedieciseis" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posdiecisietedieciocho" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posdiecinueveveinte" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posventiunoveintidos" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posveintitresveinticuatro" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posveinticincoveintiseis" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="posveintisieteveintiocho" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="fotoryan" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tb_Autoriza_OdeP" Member="Tb_Autoriza_OdeP">
+    <Type Name="Tb_Autoriza_OdeP">
+      <Column Name="clave" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="usuario" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="obs" Type="System.String" DbType="Char(50)" CanBeNull="true" />
+      <Column Name="passwordlineal" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Opcion" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_registro_vertrai" Member="tb_registro_vertrai">
+    <Type Name="tb_registro_vertrai">
+      <Column Name="fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nom_compu" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="nom_usu" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="tipo_mov" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="op_clave" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="folio" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="detalle" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="sistema" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="mov_folio" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="infoVideo" Type="System.String" DbType="VarChar(600)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_cat_usuarios" Member="tb_cat_usuarios">
+    <Type Name="tb_cat_usuarios">
+      <Column Name="usu_login" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="grp_clave" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_password" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_nombre" Type="System.String" DbType="Char(40)" CanBeNull="true" />
+      <Column Name="usu_departamento" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="usu_puesto" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="usu_email" Type="System.String" DbType="Char(80)" CanBeNull="true" />
+      <Column Name="usu_pass" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="usu_tipo_nomina" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="usu_UERP" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="estatus" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="prov_clave" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="usu_Extension" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="usu_Celular" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="usu_permisoprecio" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="Usu_SupervisorManto" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="nomina" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CambiosOrdenes" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_mstr_trailer" Member="tb_mstr_trailer">
+    <Type Name="tb_mstr_trailer">
+      <Column Name="fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="hora_trailer" Type="System.String" DbType="Char(24)" CanBeNull="true" />
+      <Column Name="no_trailer" Type="System.String" DbType="Char(12)" CanBeNull="true" />
+      <Column Name="turno" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="destino" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="transporte" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="tempini" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="tempfin" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="horaini" Type="System.String" DbType="Char(24)" CanBeNull="true" />
+      <Column Name="horafin" Type="System.String" DbType="Char(24)" CanBeNull="true" />
+      <Column Name="anden" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="chofer" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="responsable" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="concepto1" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto2" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto3" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto4" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5a" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5b" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5c" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5d" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5e" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5f" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5g" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5h" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5i" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5j" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5k" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto5l" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto6" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto7" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto8" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto9" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="concepto10" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="largo" Type="System.String" DbType="Char(15)" CanBeNull="true" />
+      <Column Name="gatas" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="ryan1" Type="System.String" DbType="Char(15)" CanBeNull="true" />
+      <Column Name="ryan2" Type="System.String" DbType="Char(15)" CanBeNull="true" />
+      <Column Name="posryan1" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="posryan2" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="obs" Type="System.String" DbType="Char(100)" CanBeNull="true" />
+      <Column Name="conse" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="temp" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="HoraRegVig" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="HoraEnt" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="HoraSal" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="TiempoTot" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="Radio" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="Surtible" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="Peso" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Placa" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="TiempoCar" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+      <Column Name="PesoBascula" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ObsTrans" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ObsCausa" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ObsFalta" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Guardar" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="Transfer" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="TempSetPoint" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="pdn_folio" Type="System.String" DbType="Char(6)" CanBeNull="true" />
+      <Column Name="EnvioDif" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="pesoEje1" Type="System.Decimal" DbType="Decimal(18,4)" CanBeNull="true" />
+      <Column Name="pesoEje2" Type="System.Decimal" DbType="Decimal(18,4)" CanBeNull="true" />
+      <Column Name="pesoEje3" Type="System.Decimal" DbType="Decimal(18,4)" CanBeNull="true" />
+      <Column Name="deaguilares" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="horafinTEMP" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 14.25" name="DataVerificacion">
+  <DataContextMoniker Name="/DataVerificacionDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9d6f3298-d960-4ea1-866b-df27cb5af6ae" absoluteBounds="3.625, 1, 2, 7.7322412109375005">
+      <DataClassMoniker Name="/DataVerificacionDataContext/tb_det_revision_trailer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bc836cb5-6505-45ce-a1ee-56a5a1c3d799" absoluteBounds="3.6399999999999997, 1.4600000000000009, 1.9700000000000002, 7.1722412109375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d8d42e05-6a81-412a-a918-1a5ca33dee90" absoluteBounds="7.25, 8.375, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DataVerificacionDataContext/Tb_Autoriza_OdeP" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6bdeb63c-2312-4e68-a555-99b37ec2d0f4" absoluteBounds="7.265, 8.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="de864f87-6daa-4164-bd81-493cf5eb3339" absoluteBounds="6.75, 5.25, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/DataVerificacionDataContext/tb_registro_vertrai" />
+      <nestedChildShapes>
+        <elementListCompartment Id="84bb0f60-584d-49cd-9b4c-1a4d19fa227b" absoluteBounds="6.765, 5.71, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="81a1810e-542b-47c2-a081-cbaeff2c948d" absoluteBounds="6.75, 0.5, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/DataVerificacionDataContext/tb_cat_usuarios" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f8195f2e-6320-4321-9d0d-e7e349ec78b5" absoluteBounds="6.7650000000000006, 0.96, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1adc1732-d399-45ae-b6e1-fa644b10c426" absoluteBounds="0.875, 0.5, 2, 13.5012841796875">
+      <DataClassMoniker Name="/DataVerificacionDataContext/tb_mstr_trailer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="69f23c6f-b89e-49a9-8f25-0c8f462c3ae5" absoluteBounds="0.89000000000000012, 0.96, 1.9700000000000002, 12.9412841796875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
