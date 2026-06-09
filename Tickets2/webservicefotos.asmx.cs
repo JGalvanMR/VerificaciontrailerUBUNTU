@@ -78,9 +78,25 @@ namespace Tickets2
         {
 
 
-            var fechaactual2 = Convert.ToDateTime(fechatrailer).ToString("ddMMyyyy");
+            //var fechaactual2 = Convert.ToDateTime(fechatrailer).ToString("ddMMyyyy");
 
-            var mes_anio = fechaactual2.Remove(0, 2);
+            //var mes_anio = fechaactual2.Remove(0, 2);
+
+            DateTime fechaConvertida;
+
+            if (!DateTime.TryParseExact(
+                    fechatrailer,
+                    "dd/MM/yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None,
+                    out fechaConvertida))
+            {
+                return "ERROR: Formato de fecha inválido -> " + fechatrailer;
+            }
+
+            string fechaactual2 = fechaConvertida.ToString("ddMMyyyy");
+
+            string mes_anio = fechaactual2.Substring(2);
 
             // Specify the path to save the uploaded file to.
             string savePath = "~/FotoRevisionTrailer/";

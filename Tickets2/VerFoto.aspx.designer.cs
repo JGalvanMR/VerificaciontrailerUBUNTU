@@ -7,11 +7,22 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Tickets2 {
-    
-    
-    public partial class VerFoto {
-        
+namespace Tickets2
+{
+
+
+    public partial class VerFoto
+    {
+
+        /// <summary>
+        /// Control form1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
         /// <summary>
         /// Control btnSalir.
         /// </summary>
@@ -20,7 +31,7 @@ namespace Tickets2 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSalir;
-        
+
         /// <summary>
         /// Control LiteralFoto.
         /// </summary>
@@ -29,7 +40,7 @@ namespace Tickets2 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal LiteralFoto;
-        
+
         /// <summary>
         /// Control Literalvideo.
         /// </summary>

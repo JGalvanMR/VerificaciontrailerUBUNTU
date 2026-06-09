@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Datos;
-using System.IO;
-using System.Transactions;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
+using System.Linq;
+using System.Web.UI;
+using Datos;
 
 namespace Tickets2
 {
@@ -17,46 +10,11 @@ namespace Tickets2
     {
         private DataVerificacionDataContext Dataver;
         tb_cat_usuarios objAdmin = null;
-        string verFotosLocal = "http://192.168.123.4:81/verificaciontrailer/FotoRevisionTrailer/";
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Iniciada"] != null)
-            {
-                if (Session["Iniciada"].ToString() != "1")
-                {
-                    Session["Iniciada"] = "0";
-                    Response.Redirect("PaginaLogin.aspx");
-                }
-
-            }
-            else
-            {
-                Session["Iniciada"] = "0";
-                Response.Redirect("PaginaLogin.aspx");
-            }
-
-
-            if (Session["error"] != null)
-            {
-                if (Session["error"].ToString() != "")
-                {
-                    MessageBoxError.Show(Session["error"].ToString());
-                    Session["error"] = "";
-                }
-
-            }
-
-
-            if (Session["exito"] != null)
-            {
-                if (Session["exito"].ToString() != "")
-                {
-                    MessageBoxSuccess.Show(Session["exito"].ToString());
-                    Session["exito"] = "";
-                }
-
-            }
-
+            ValidarSesion();
+            MostrarMensajes();
 
             if (Session["objAdminMan"] != null)
             {
@@ -72,8 +30,40 @@ namespace Tickets2
             {
                 Response.Redirect("PaginaLogin.aspx");
             }
+        }
 
+        private void ValidarSesion()
+        {
+            if (Session["Iniciada"] == null || Session["Iniciada"].ToString() != "1")
+            {
+                Session["Iniciada"] = "0";
+                Response.Redirect("PaginaLogin.aspx");
+            }
+        }
 
+        private void MostrarMensajes()
+        {
+            if (Session["error"] != null)
+            {
+                string error = Convert.ToString(Session["error"]);
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    MessageBoxError.Show(error);
+                    Session["error"] = "";
+                }
+            }
+
+            if (Session["exito"] != null)
+            {
+                string exito = Convert.ToString(Session["exito"]);
+
+                if (!string.IsNullOrEmpty(exito))
+                {
+                    MessageBoxSuccess.Show(exito);
+                    Session["exito"] = "";
+                }
+            }
         }
 
         private void CargarFotosTrailers()
@@ -88,6 +78,7 @@ namespace Tickets2
             }
 
             string[] substrings = foliox.Split('_');
+
             if (substrings.Length < 2)
             {
                 Session["error"] = "Formato de folio incorrecto";
@@ -95,13 +86,12 @@ namespace Tickets2
                 return;
             }
 
-            string fechaStr = substrings[0];        // Ej: "22052026"
+            string fechaStr = substrings[0];
             string folioStr = substrings[1];
 
-            // Reconstruir fecha correctamente
             if (fechaStr.Length == 8)
             {
-                fechaStr = fechaStr.Insert(2, "/").Insert(5, "/");   // "22/05/2026"
+                fechaStr = fechaStr.Insert(2, "/").Insert(5, "/");
             }
             else
             {
@@ -115,16 +105,19 @@ namespace Tickets2
 
             try
             {
-                fecha = DateTime.ParseExact(fechaStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                fecha = DateTime.ParseExact(
+                    fechaStr,
+                    "dd/MM/yyyy",
+                    CultureInfo.InvariantCulture);
+
                 conse = Convert.ToInt32(folioStr);
             }
             catch
             {
-                Session["error"] = "Error al procesar la fecha o folio";
+                Session["error"] = "Error al procesar fecha y folio";
                 Response.Redirect("AdminManto.aspx");
                 return;
             }
-
             var folio = substrings[1].ToString();
             var consulta = from u in Dataver.tb_mstr_trailer
                            join p in Dataver.tb_det_revision_trailer
@@ -178,262 +171,92 @@ namespace Tickets2
                                fecha = u.fecha
 
                            };
+
             string html = "";
             string html2 = "";
-            if (consulta.Count() > 0)
+
+            foreach (var i in consulta)
             {
-                foreach (var i in consulta)
+                html += CrearImagen(i.fotoanden, "Anden de carga");
+
+                html += CrearImagen(i.foto1, "Set point inicial");
+                html += CrearImagen(i.foto2, "Número de caja");
+                html += CrearImagen(i.foto3, "Difusor");
+                html += CrearImagen(i.foto4, "Piso");
+                html += CrearImagen(i.foto5, "Caja completa");
+
+                html += CrearImagen(i.foto6, "Temperatura producto 1");
+                html += CrearImagen(i.foto7, "Temperatura producto 2");
+                html += CrearImagen(i.foto8, "Temperatura producto 3");
+                html += CrearImagen(i.foto9, "Temperatura producto 4");
+                html += CrearImagen(i.foto10, "Temperatura producto 5");
+                html += CrearImagen(i.foto11, "Temperatura producto 6");
+
+                html += CrearImagen(i.foto12, "Set point final");
+                html += CrearImagen(i.foto13, "Término de carga");
+
+                html += CrearImagen(i.fotoposicion2, "Posición 1 y 2");
+                html += CrearImagen(i.fotoposicion4, "Posición 3 y 4");
+                html += CrearImagen(i.fotoposicion6, "Posición 5 y 6");
+                html += CrearImagen(i.fotoposicion8, "Posición 7 y 8");
+                html += CrearImagen(i.fotoposicion10, "Posición 9 y 10");
+                html += CrearImagen(i.fotoposicion12, "Posición 11 y 12");
+                html += CrearImagen(i.fotoposicion14, "Posición 13 y 14");
+                html += CrearImagen(i.fotoposicion16, "Posición 15 y 16");
+                html += CrearImagen(i.fotoposicion18, "Posición 17 y 18");
+                html += CrearImagen(i.fotoposicion20, "Posición 19 y 20");
+                html += CrearImagen(i.fotoposicion22, "Posición 21 y 22");
+                html += CrearImagen(i.fotoposicion24, "Posición 23 y 24");
+                html += CrearImagen(i.fotoposicion26, "Posición 25 y 26");
+                html += CrearImagen(i.fotoposicion28, "Posición 27 y 28");
+
+                if (!string.IsNullOrEmpty(i.foto14))
                 {
-                    if (i.fotoanden != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoanden + "' data-src='FotoRevisionTrailer/" + i.fotoanden + "' data-sub-html='<h4>Anden De Carga</h4>'>";
-                        html += "<a href = ''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoanden + "'/>";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto1 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto1 + "' data-src='FotoRevisionTrailer/" + i.foto1 + "' data-sub-html='<h4>Set point Inicial</h4>'>";
-                        html += "<a href = ''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto1 + "'/>";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto2 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto2 + "' 375, 'FotoRevisionTrailer/" + i.foto2 + "' 480, 'FotoRevisionTrailer/" + i.foto2 + "' 800' data-src='FotoRevisionTrailer/" + i.foto2 + "' data-sub-html='<h4>Numero de Caja</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto2 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto3 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto3 + "' 375, 'FotoRevisionTrailer/" + i.foto3 + "' 480, 'FotoRevisionTrailer/" + i.foto3 + "' 800' data-src='FotoRevisionTrailer/" + i.foto3 + "' data-sub-html='<h4>Difusor</h4>'>";
-                        html += "<a href>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto3 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto4 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto4 + "' 375, 'FotoRevisionTrailer/" + i.foto4 + "' 480, 'FotoRevisionTrailer/" + i.foto4 + "' 800' data-src='FotoRevisionTrailer/" + i.foto4 + "' data-sub-html='<h4>Piso</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto4 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto5 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto5 + "' 375, 'FotoRevisionTrailer/" + i.foto5 + "' 480, 'FotoRevisionTrailer/" + i.foto5 + "' 800' data-src='FotoRevisionTrailer/" + i.foto5 + "' data-sub-html='<h4>Caja Completa</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto5 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto6 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto6 + "' 375, 'FotoRevisionTrailer/" + i.foto6 + "' 480, 'FotoRevisionTrailer/" + i.foto6 + "' 800' data-src='FotoRevisionTrailer/" + i.foto6 + "' data-sub-html='<h4>Temperatura del Producto 1</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto6 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto7 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto7 + "' 375, 'FotoRevisionTrailer/" + i.foto7 + "' 480, 'FotoRevisionTrailer/" + i.foto7 + "' 800' data-src='FotoRevisionTrailer/" + i.foto7 + "' data-sub-html='<h4>Temperatura del Producto 2</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto7 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto8 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto8 + "' 375, 'FotoRevisionTrailer/" + i.foto8 + "' 480, 'FotoRevisionTrailer/" + i.foto8 + "' 800' data-src='FotoRevisionTrailer/" + i.foto8 + "' data-sub-html='<h4>Temperatura del Producto 3</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto8 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto9 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto9 + "' 375, 'FotoRevisionTrailer/" + i.foto9 + "' 480, 'FotoRevisionTrailer/" + i.foto9 + "' 800' data-src='FotoRevisionTrailer/" + i.foto9 + "' data-sub-html='<h4>Temperatura del Producto 4</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto9 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto10 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto10 + "' 375, 'FotoRevisionTrailer/" + i.foto10 + "' 480, 'FotoRevisionTrailer/" + i.foto10 + "' 800' data-src='FotoRevisionTrailer/" + i.foto10 + "' data-sub-html='<h4>Temperatura del Producto 5</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto10 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto11 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto11 + "' 375, 'FotoRevisionTrailer/" + i.foto11 + "' 480, 'FotoRevisionTrailer/" + i.foto11 + "' 800' data-src='FotoRevisionTrailer/" + i.foto11 + "' data-sub-html='<h4>Temperatura del Producto 6</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto11 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto12 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto12 + "' 375, 'FotoRevisionTrailer/" + i.foto12 + "' 480, 'FotoRevisionTrailer/" + i.foto12 + "' 800' data-src='FotoRevisionTrailer/" + i.foto12 + "' data-sub-html='<h4>Set Point Final</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto12 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto13 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.foto13 + "' 375, 'FotoRevisionTrailer/" + i.foto13 + "' 480, 'FotoRevisionTrailer/" + i.foto13 + "' 800' data-src='FotoRevisionTrailer/" + i.foto13 + "' data-sub-html='<h4>Termino de Carga</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.foto13 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.foto14 != "no.png")
-                    {
-                        html += "<li class='col-xs-6 col-sm-4 col-md-3 video' data-poster = 'img/Ryanportada.jpg' data-sub-html = 'Video Encendido RYAN' data-html = '#video1' >";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='img/Ryanportada.jpg' />";
-                        html += "<div class='demo-gallery-poster'>";
-                        html += "<img src = 'img/play-button.png'/>";
-                        html += "</div>";
-                        html += "</a>";
-                        html += "</li>";
-                        html2 += "<div style = 'display:none;' id = 'video1' > ";
-                        html2 += "<video class = 'lg-video-object lg-html5' controls muted loop preload = 'none' >";
-                        html2 += "<source src = 'FotoRevisionTrailer/Converted/" + i.foto14 + "' type = 'video/mp4' > ";
-                        html2 += "Su navegador no es compatible con video HTML5.";
-                        html2 += "</ video>";
-                        html2 += "</ div>";
-                        Literalvideo.Text = html2;
-                    }
-                    if (i.fotoposicion2 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion2 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion2 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion2 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion2 + "' data-sub-html='<h4>POSICION 1 Y 2</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion2 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion4 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion4 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion4 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion4 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion4 + "' data-sub-html='<h4>POSICION 3 Y 4</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion4 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion6 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion6 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion6 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion6 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion6 + "' data-sub-html='<h4>POSICION 5 Y 6</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion6 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion8 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion8 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion8 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion8 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion8 + "' data-sub-html='<h4>POSICION 7 Y 8</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion8 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion10 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion10 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion10 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion10 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion10 + "' data-sub-html='<h4>POSICION 9 Y 10</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion10 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion12 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion12 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion12 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion12 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion12 + "' data-sub-html='<h4>POSICION 11 Y 12</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion12 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion14 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion14 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion14 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion14 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion14 + "' data-sub-html='<h4>POSICION 13 Y 14</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion14 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion16 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion16 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion16 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion16 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion16 + "' data-sub-html='<h4>POSICION 15 Y 16</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion16 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion18 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion18 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion18 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion18 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion18 + "' data-sub-html='<h4>POSICION 17 Y 18</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion18 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion20 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion20 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion20 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion20 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion20 + "' data-sub-html='<h4>POSICION 19 Y 20</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion20 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion22 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion22 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion22 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion22 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion22 + "' data-sub-html='<h4>POSICION 21 Y 22</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion22 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion24 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion24 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion24 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion24 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion24 + "' data-sub-html='<h4>POSICION 23 Y 24</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion24 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion26 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion26 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion26 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion26 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion26 + "' data-sub-html='<h4>POSICION 25 Y 26</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion26 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
-                    if (i.fotoposicion28 != "no.png")
-                    {
-                        html += " <li class='col-xs-6 col-sm-4 col-md-3' data-responsive='FotoRevisionTrailer/" + i.fotoposicion28 + "' 375, 'FotoRevisionTrailer/" + i.fotoposicion28 + "' 480, 'FotoRevisionTrailer/" + i.fotoposicion28 + "' 800' data-src='FotoRevisionTrailer/" + i.fotoposicion28 + "' data-sub-html='<h4>POSICION 27 Y 28</h4>'>";
-                        html += "<a href=''>";
-                        html += "<img class='img-responsive' src='FotoRevisionTrailer/" + i.fotoposicion28 + "' />";
-                        html += "</a>";
-                        html += "</li>";
-                    }
+                    html += "<li class='col-xs-6 col-sm-4 col-md-3 video' " +
+                            "data-poster='img/Ryanportada.jpg' " +
+                            "data-sub-html='Video Encendido RYAN' " +
+                            "data-html='#video1'>";
+
+                    html += "<a href=''>";
+                    html += "<img class='img-responsive' src='img/Ryanportada.jpg'/>";
+                    html += "<div class='demo-gallery-poster'>";
+                    html += "<img src='img/play-button.png'/>";
+                    html += "</div>";
+                    html += "</a>";
+                    html += "</li>";
+
+                    html2 += "<div style='display:none;' id='video1'>";
+                    html2 += "<video class='lg-video-object lg-html5' controls muted loop preload='none'>";
+                    html2 += "<source src='FotoRevisionTrailer/Converted/" + i.foto14 + "' type='video/mp4'>";
+                    html2 += "Su navegador no soporta video HTML5.";
+                    html2 += "</video>";
+                    html2 += "</div>";
                 }
             }
-            else
-            {
-                Session["error"] = "El trailer seleccionado aun no tiene fotos a mostrar";
-                Response.Redirect("AdminManto.aspx");
-            }
+
             LiteralFoto.Text = html;
+            Literalvideo.Text = html2;
+        }
+
+        private string CrearImagen(string ruta, string titulo)
+        {
+            if (string.IsNullOrEmpty(ruta) || ruta == "no.png")
+                return "";
+
+            string html = "";
+
+            html += "<li class='col-xs-6 col-sm-4 col-md-3' ";
+            html += "data-src='FotoRevisionTrailer/" + ruta + "' ";
+            html += "data-sub-html='<h4>" + titulo + "</h4>'>";
+
+            html += "<a href=''>";
+            html += "<img class='img-responsive' ";
+            html += "src='FotoRevisionTrailer/" + ruta + "' />";
+            html += "</a>";
+
+            html += "</li>";
+
+            return html;
         }
 
         protected void btnSalir_Click(object sender, EventArgs e)
@@ -441,7 +264,5 @@ namespace Tickets2
             Session.RemoveAll();
             Response.Redirect("PaginaLogin.aspx");
         }
-
-
     }
 }
