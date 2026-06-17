@@ -439,3 +439,10 @@
 	</body>
 </html>
 
+n']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
+                });
+            }
+        </script>
+      </form>
+    </body>
+</html>

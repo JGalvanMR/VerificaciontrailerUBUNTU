@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Datos;
-using System.Data.SqlClient;
-using System.Data;
-using System.IO;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Diagnostics;
-using System.Net;
-using System.Net.Mail;
 
 namespace Tickets2
 {
@@ -1070,19 +1071,43 @@ namespace Tickets2
                                     MessageBoxError.Show("El video no puede exceder los 100MB");
                                     return;
                                 }
+                                // Validar que sea .mp4 o .mov (formato nativo de iPhone)
+                                string extension = Path.GetExtension(hpf.FileName).ToLower();
+                                if (extension != ".mp4" && extension != ".mov")
+                                {
+                                    MessageBoxError.Show("La extensión del video no es permitida. Solo se acepta .mp4 o .mov");
+                                    return;
+                                }
 
                                 string nombre_archivo = "Embarque_" + fechaarchivo + "_" + conse + "_" + campo;
                                 string saveAs = Server.MapPath(videoOriginalPath);
                                 videoTmpName = nombre_archivo;
-                                string originalVideo = Path.Combine(saveAs, videoTmpName + Path.GetExtension(hpf.FileName));
+                                string originalVideo = Path.Combine(saveAs, videoTmpName + extension);
                                 hpf.SaveAs(originalVideo);
 
                                 if (EncodingVideo(originalVideo))
                                 {
+                                    string fileName = videoConvertedName;
+                                    string sourcePath = Server.MapPath(videoConvertedPath);
+                                    string originPath = Server.MapPath(videoOriginalPath);
+                                    string targetPath = @"\\192.168.123.4\FotosRevisionTrailer\";
+
+                                    string originFile = Path.Combine(originPath, fileName);
+                                    string sourceFile = Path.Combine(sourcePath, fileName);
+                                    string destFile = Path.Combine(targetPath, fileName);
+
                                     if (File.Exists(originalVideo))
                                     {
-                                        try { File.Delete(originalVideo); } catch { }
-                                        insert.vidrayan = nombre_archivo + ".mp4";
+                                        try
+                                        {
+                                            File.Delete(originalVideo); // Borramos el .mov original
+                                            insert.vidrayan = nombre_archivo + ".mp4"; // Guardamos referencia al .mp4 convertido
+                                        }
+                                        catch (IOException ed)
+                                        {
+                                            Console.WriteLine(ed.Message);
+                                            return;
+                                        }
                                     }
                                 }
                                 else
@@ -1212,6 +1237,13 @@ namespace Tickets2
                                     MessageBoxError.Show("El video no puede exceder los 100MB");
                                     return;
                                 }
+                                // Validar que sea .mp4 o .mov (formato nativo de iPhone)
+                                string extension = Path.GetExtension(hpf.FileName).ToLower();
+                                if (extension != ".mp4" && extension != ".mov")
+                                {
+                                    MessageBoxError.Show("La extensión del video no es permitida. Solo se acepta .mp4 o .mov");
+                                    return;
+                                }
 
                                 string nombre_archivo = "Embarque_" + fechaarchivo + "_" + conse + "_" + campo;
                                 string saveAs = Server.MapPath(videoOriginalPath);
@@ -1221,10 +1253,28 @@ namespace Tickets2
 
                                 if (EncodingVideo(originalVideo))
                                 {
+                                    string fileName = videoConvertedName;
+                                    string sourcePath = Server.MapPath(videoConvertedPath);
+                                    string originPath = Server.MapPath(videoOriginalPath);
+                                    string targetPath = @"\\192.168.123.4\FotosRevisionTrailer\";
+
+                                    string originFile = Path.Combine(originPath, fileName);
+                                    string sourceFile = Path.Combine(sourcePath, fileName);
+                                    string destFile = Path.Combine(targetPath, fileName);
+
                                     if (File.Exists(originalVideo))
                                     {
-                                        try { File.Delete(originalVideo); } catch { }
-                                        actualizar.vidrayan = nombre_archivo + ".mp4";
+                                        try
+                                        {
+                                            File.Delete(originalVideo);
+                                            actualizar.vidrayan = nombre_archivo + ".mp4"; // Guardamos referencia al .mp4 convertido
+                                        }
+                                        catch (IOException ed)
+                                        {
+                                            Console.WriteLine(ed.Message);
+                                            MessageBoxError.Show("Error al procesar el video: " + ed.Message);
+                                            return;
+                                        }
                                     }
                                 }
                                 else
@@ -2040,7 +2090,7 @@ namespace Tickets2
 
 
 
-        private bool EncodingVideo(string originalVideo)
+        private bool EncodingVideoOG(string originalVideo)
         {
             bool value = false;
             string saveAs = Server.MapPath(videoConvertedPath);
@@ -2063,6 +2113,62 @@ namespace Tickets2
                 value = true;
             }
             return value;
+        }
+
+        private bool EncodingVideo(string inputPath)
+        {
+            try
+            {
+                // Aseguramos que el nombre final sea .mp4
+                videoConvertedName = Path.GetFileNameWithoutExtension(inputPath) + ".mp4";
+
+                string outputDir = Server.MapPath(videoConvertedPath);
+
+                // Crear la carpeta si no existe (válido tanto en Windows como en Ubuntu)
+                if (!Directory.Exists(outputDir))
+                {
+                    Directory.CreateDirectory(outputDir);
+                }
+
+                string outputPath = Path.Combine(outputDir, videoConvertedName);
+
+                // Detectar el Sistema Operativo (Compatible con .NET Framework 4.5+)
+                bool isWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
+
+                // Si es Windows, busca el .exe en la carpeta js/. Si es Unix/Linux, usa el comando global 'ffmpeg'
+                string ffmpegPath = isWindows ? Server.MapPath("~/js/ffmpeg.exe") : "ffmpeg";
+
+                // Argumentos de conversión (compatibles con Linux y Windows)
+                string arguments = $"-i \"{inputPath}\" -c:v libx264 -preset fast -crf 23 -c:a aac -b:a 128k -movflags +faststart \"{outputPath}\"";
+
+                Process process = new Process();
+                process.StartInfo.FileName = ffmpegPath;
+                process.StartInfo.Arguments = arguments;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardError = true;
+                process.Start();
+                process.WaitForExit();
+
+                // Si FFmpeg devuelve 0, significa que la conversión fue exitosa
+                if (process.ExitCode == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    // Si falla, guardamos el error de FFmpeg en un log para que lo revises
+                    string errorLog = process.StandardError.ReadToEnd();
+                    System.IO.File.AppendAllText(Server.MapPath("~/ffmpeg_error.log"), "Error FFmpeg: " + errorLog + "\n");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Guardar cualquier excepción de C# en un log
+                System.IO.File.AppendAllText(Server.MapPath("~/csharp_error.log"), "Error C#: " + ex.ToString() + "\n");
+                return false;
+            }
         }
 
     }
