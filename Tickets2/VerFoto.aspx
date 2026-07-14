@@ -33,33 +33,33 @@
             padding-top: 10px;
         }
 
-        .demo-gallery > ul {
-            margin-bottom: 0;
-        }
+            .demo-gallery > ul {
+                margin-bottom: 0;
+            }
 
-        .demo-gallery > ul > li {
-            margin-bottom: 20px;
-        }
+                .demo-gallery > ul > li {
+                    margin-bottom: 20px;
+                }
 
-        .demo-gallery > ul > li a {
-            border: 3px solid #ED174F;
-            border-radius: 5px;
-            display: block;
-            overflow: hidden;
-            position: relative;
-            background-color: #000;
-        }
+                    .demo-gallery > ul > li a {
+                        border: 3px solid #ED174F;
+                        border-radius: 5px;
+                        display: block;
+                        overflow: hidden;
+                        position: relative;
+                        background-color: #000;
+                    }
 
-        .demo-gallery > ul > li a > img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
+                        .demo-gallery > ul > li a > img {
+                            width: 100%;
+                            height: 220px;
+                            object-fit: cover;
+                            transition: transform 0.3s ease;
+                        }
 
-        .demo-gallery > ul > li a:hover > img {
-            transform: scale(1.05);
-        }
+                        .demo-gallery > ul > li a:hover > img {
+                            transform: scale(1.05);
+                        }
 
         .demo-gallery-poster {
             background-color: rgba(0,0,0,0.4);
@@ -71,16 +71,16 @@
             transition: background-color 0.3s ease;
         }
 
-        .demo-gallery-poster img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 48px;
-            height: 48px;
-            margin-left: -24px;
-            margin-top: -24px;
-            opacity: 0.9;
-        }
+            .demo-gallery-poster img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 48px;
+                height: 48px;
+                margin-left: -24px;
+                margin-top: -24px;
+                opacity: 0.9;
+            }
 
         .demo-gallery > ul > li a:hover .demo-gallery-poster {
             background-color: rgba(0,0,0,0.6);
@@ -145,8 +145,7 @@
                     <div class="page-content">
 
                         <div class="page-header">
-                            <h1>
-                                Galería de Fotos
+                            <h1>Galería de Fotos
                                 <small>
                                     <i class="ace-icon fa fa-angle-double-right"></i>
                                     Fotos realizadas a los trailers
