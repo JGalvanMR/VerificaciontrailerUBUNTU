@@ -273,7 +273,7 @@
                                                             <label><i class="fas fa-video"></i> Video Activación Ryan:</label>
                                                             <div style="margin-bottom: 5px;"><asp:Label runat="server" ID="lblvideoryan" CssClass="label label-default"></asp:Label></div>
                                                             <!-- Atributo accept agregado para compatibilidad con videos de iPhone -->
-                                                            <asp:FileUpload ID="Videoryan" runat="server" CssClass="file" data-show-upload="false" data-show-caption="true" accept="video/mp4,video/quicktime,.mov,.mp4" />
+                                                            <asp:FileUpload ID="Videoryan" runat="server" CssClass="file" data-show-upload="false" data-show-caption="true" capture="environment" accept="video/mp4,video/quicktime,.mov,.mp4" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
