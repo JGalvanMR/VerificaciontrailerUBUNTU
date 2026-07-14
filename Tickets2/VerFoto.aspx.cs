@@ -151,8 +151,9 @@ namespace Tickets2
                                foto10 = x.temprod5 == null ? "no.png" : x.temprod5.ToString(),
                                foto11 = x.temprod6 == null ? "no.png" : x.temprod6.ToString(),
                                foto12 = x.setpointfin == null ? "no.png" : x.setpointfin.ToString(),
-                               foto13 = x.termino_carga == null ? "no.png" : x.termino_carga.ToString(),
+                               fotoRyan = x.fotoryan == null ? "no.png" : x.fotoryan.ToString(),
                                foto14 = x.vidrayan == null ? "no.png" : x.vidrayan.ToString(),
+                               foto13 = x.termino_carga == null ? "no.png" : x.termino_carga.ToString(),
                                fotoanden = x.anden == null ? "no.png" : x.anden.ToString(),
                                fotoposicion2 = x.posunodos == null ? "no.png" : x.posunodos.ToString(),
                                fotoposicion4 = x.postrescuatro == null ? "no.png" : x.postrescuatro.ToString(),
@@ -193,6 +194,7 @@ namespace Tickets2
                 html += CrearImagen(i.foto11, "Temperatura producto 6");
 
                 html += CrearImagen(i.foto12, "Set point final");
+                html += CrearImagen(i.fotoRyan, "Foto Ryan");
                 html += CrearImagen(i.foto13, "Término de carga");
 
                 html += CrearImagen(i.fotoposicion2, "Posición 1 y 2");

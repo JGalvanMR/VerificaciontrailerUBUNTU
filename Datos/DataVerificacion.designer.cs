@@ -33,16 +33,16 @@ namespace Datos
     partial void Inserttb_det_revision_trailer(tb_det_revision_trailer instance);
     partial void Updatetb_det_revision_trailer(tb_det_revision_trailer instance);
     partial void Deletetb_det_revision_trailer(tb_det_revision_trailer instance);
-    partial void Inserttb_registro_vertrai(tb_registro_vertrai instance);
-    partial void Updatetb_registro_vertrai(tb_registro_vertrai instance);
-    partial void Deletetb_registro_vertrai(tb_registro_vertrai instance);
     partial void Inserttb_cat_usuarios(tb_cat_usuarios instance);
     partial void Updatetb_cat_usuarios(tb_cat_usuarios instance);
     partial void Deletetb_cat_usuarios(tb_cat_usuarios instance);
+    partial void Inserttb_registro_vertrai(tb_registro_vertrai instance);
+    partial void Updatetb_registro_vertrai(tb_registro_vertrai instance);
+    partial void Deletetb_registro_vertrai(tb_registro_vertrai instance);
     #endregion
 		
 		public DataVerificacionDataContext() : 
-				base(global::Datos.Properties.Settings.Default.GAB_IrapuatoConnectionString2, mappingSource)
+				base(global::Datos.Properties.Settings.Default.GAB_IrapuatoConnectionString4, mappingSource)
 		{
 			OnCreated();
 		}
@@ -71,27 +71,19 @@ namespace Datos
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<tb_mstr_trailer> tb_mstr_trailer
+		{
+			get
+			{
+				return this.GetTable<tb_mstr_trailer>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tb_det_revision_trailer> tb_det_revision_trailer
 		{
 			get
 			{
 				return this.GetTable<tb_det_revision_trailer>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Tb_Autoriza_OdeP> Tb_Autoriza_OdeP
-		{
-			get
-			{
-				return this.GetTable<Tb_Autoriza_OdeP>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tb_registro_vertrai> tb_registro_vertrai
-		{
-			get
-			{
-				return this.GetTable<tb_registro_vertrai>();
 			}
 		}
 		
@@ -103,1826 +95,19 @@ namespace Datos
 			}
 		}
 		
-		public System.Data.Linq.Table<tb_mstr_trailer> tb_mstr_trailer
+		public System.Data.Linq.Table<tb_registro_vertrai> tb_registro_vertrai
 		{
 			get
 			{
-				return this.GetTable<tb_mstr_trailer>();
+				return this.GetTable<tb_registro_vertrai>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_det_revision_trailer")]
-	public partial class tb_det_revision_trailer : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.DateTime _fecha;
-		
-		private decimal _conse;
-		
-		private string _responsable_captu;
-		
-		private string _setpointini;
-		
-		private string _numcaja;
-		
-		private string _difusor;
-		
-		private string _piso;
-		
-		private string _cajacompleta;
-		
-		private string _temprod1;
-		
-		private string _temprod2;
-		
-		private string _temprod3;
-		
-		private string _temprod4;
-		
-		private string _temprod5;
-		
-		private string _temprod6;
-		
-		private string _setpointfin;
-		
-		private string _vidrayan;
-		
-		private string _termino_carga;
-		
-		private System.Nullable<decimal> _porcentaje;
-		
-		private System.Nullable<System.DateTime> _fechaini;
-		
-		private System.Nullable<decimal> _conseini;
-		
-		private string _anden;
-		
-		private string _posunodos;
-		
-		private string _postrescuatro;
-		
-		private string _poscincoseis;
-		
-		private string _possieteocho;
-		
-		private string _posnuevediez;
-		
-		private string _posoncedoce;
-		
-		private string _postrececatorce;
-		
-		private string _posquincedieciseis;
-		
-		private string _posdiecisietedieciocho;
-		
-		private string _posdiecinueveveinte;
-		
-		private string _posventiunoveintidos;
-		
-		private string _posveintitresveinticuatro;
-		
-		private string _posveinticincoveintiseis;
-		
-		private string _posveintisieteveintiocho;
-		
-		private string _fotoryan;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfechaChanging(System.DateTime value);
-    partial void OnfechaChanged();
-    partial void OnconseChanging(decimal value);
-    partial void OnconseChanged();
-    partial void Onresponsable_captuChanging(string value);
-    partial void Onresponsable_captuChanged();
-    partial void OnsetpointiniChanging(string value);
-    partial void OnsetpointiniChanged();
-    partial void OnnumcajaChanging(string value);
-    partial void OnnumcajaChanged();
-    partial void OndifusorChanging(string value);
-    partial void OndifusorChanged();
-    partial void OnpisoChanging(string value);
-    partial void OnpisoChanged();
-    partial void OncajacompletaChanging(string value);
-    partial void OncajacompletaChanged();
-    partial void Ontemprod1Changing(string value);
-    partial void Ontemprod1Changed();
-    partial void Ontemprod2Changing(string value);
-    partial void Ontemprod2Changed();
-    partial void Ontemprod3Changing(string value);
-    partial void Ontemprod3Changed();
-    partial void Ontemprod4Changing(string value);
-    partial void Ontemprod4Changed();
-    partial void Ontemprod5Changing(string value);
-    partial void Ontemprod5Changed();
-    partial void Ontemprod6Changing(string value);
-    partial void Ontemprod6Changed();
-    partial void OnsetpointfinChanging(string value);
-    partial void OnsetpointfinChanged();
-    partial void OnvidrayanChanging(string value);
-    partial void OnvidrayanChanged();
-    partial void Ontermino_cargaChanging(string value);
-    partial void Ontermino_cargaChanged();
-    partial void OnporcentajeChanging(System.Nullable<decimal> value);
-    partial void OnporcentajeChanged();
-    partial void OnfechainiChanging(System.Nullable<System.DateTime> value);
-    partial void OnfechainiChanged();
-    partial void OnconseiniChanging(System.Nullable<decimal> value);
-    partial void OnconseiniChanged();
-    partial void OnandenChanging(string value);
-    partial void OnandenChanged();
-    partial void OnposunodosChanging(string value);
-    partial void OnposunodosChanged();
-    partial void OnpostrescuatroChanging(string value);
-    partial void OnpostrescuatroChanged();
-    partial void OnposcincoseisChanging(string value);
-    partial void OnposcincoseisChanged();
-    partial void OnpossieteochoChanging(string value);
-    partial void OnpossieteochoChanged();
-    partial void OnposnuevediezChanging(string value);
-    partial void OnposnuevediezChanged();
-    partial void OnposoncedoceChanging(string value);
-    partial void OnposoncedoceChanged();
-    partial void OnpostrececatorceChanging(string value);
-    partial void OnpostrececatorceChanged();
-    partial void OnposquincedieciseisChanging(string value);
-    partial void OnposquincedieciseisChanged();
-    partial void OnposdiecisietedieciochoChanging(string value);
-    partial void OnposdiecisietedieciochoChanged();
-    partial void OnposdiecinueveveinteChanging(string value);
-    partial void OnposdiecinueveveinteChanged();
-    partial void OnposventiunoveintidosChanging(string value);
-    partial void OnposventiunoveintidosChanged();
-    partial void OnposveintitresveinticuatroChanging(string value);
-    partial void OnposveintitresveinticuatroChanged();
-    partial void OnposveinticincoveintiseisChanging(string value);
-    partial void OnposveinticincoveintiseisChanged();
-    partial void OnposveintisieteveintiochoChanging(string value);
-    partial void OnposveintisieteveintiochoChanged();
-    partial void OnfotoryanChanging(string value);
-    partial void OnfotoryanChanged();
-    #endregion
-		
-		public tb_det_revision_trailer()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="DateTime NOT NULL", IsPrimaryKey=true)]
-		public System.DateTime fecha
-		{
-			get
-			{
-				return this._fecha;
-			}
-			set
-			{
-				if ((this._fecha != value))
-				{
-					this.OnfechaChanging(value);
-					this.SendPropertyChanging();
-					this._fecha = value;
-					this.SendPropertyChanged("fecha");
-					this.OnfechaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conse", DbType="Decimal(2,0) NOT NULL", IsPrimaryKey=true)]
-		public decimal conse
-		{
-			get
-			{
-				return this._conse;
-			}
-			set
-			{
-				if ((this._conse != value))
-				{
-					this.OnconseChanging(value);
-					this.SendPropertyChanging();
-					this._conse = value;
-					this.SendPropertyChanged("conse");
-					this.OnconseChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_responsable_captu", DbType="VarChar(50)")]
-		public string responsable_captu
-		{
-			get
-			{
-				return this._responsable_captu;
-			}
-			set
-			{
-				if ((this._responsable_captu != value))
-				{
-					this.Onresponsable_captuChanging(value);
-					this.SendPropertyChanging();
-					this._responsable_captu = value;
-					this.SendPropertyChanged("responsable_captu");
-					this.Onresponsable_captuChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_setpointini", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string setpointini
-		{
-			get
-			{
-				return this._setpointini;
-			}
-			set
-			{
-				if ((this._setpointini != value))
-				{
-					this.OnsetpointiniChanging(value);
-					this.SendPropertyChanging();
-					this._setpointini = value;
-					this.SendPropertyChanged("setpointini");
-					this.OnsetpointiniChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numcaja", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string numcaja
-		{
-			get
-			{
-				return this._numcaja;
-			}
-			set
-			{
-				if ((this._numcaja != value))
-				{
-					this.OnnumcajaChanging(value);
-					this.SendPropertyChanging();
-					this._numcaja = value;
-					this.SendPropertyChanged("numcaja");
-					this.OnnumcajaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_difusor", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string difusor
-		{
-			get
-			{
-				return this._difusor;
-			}
-			set
-			{
-				if ((this._difusor != value))
-				{
-					this.OndifusorChanging(value);
-					this.SendPropertyChanging();
-					this._difusor = value;
-					this.SendPropertyChanged("difusor");
-					this.OndifusorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_piso", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string piso
-		{
-			get
-			{
-				return this._piso;
-			}
-			set
-			{
-				if ((this._piso != value))
-				{
-					this.OnpisoChanging(value);
-					this.SendPropertyChanging();
-					this._piso = value;
-					this.SendPropertyChanged("piso");
-					this.OnpisoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cajacompleta", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string cajacompleta
-		{
-			get
-			{
-				return this._cajacompleta;
-			}
-			set
-			{
-				if ((this._cajacompleta != value))
-				{
-					this.OncajacompletaChanging(value);
-					this.SendPropertyChanging();
-					this._cajacompleta = value;
-					this.SendPropertyChanged("cajacompleta");
-					this.OncajacompletaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod1", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string temprod1
-		{
-			get
-			{
-				return this._temprod1;
-			}
-			set
-			{
-				if ((this._temprod1 != value))
-				{
-					this.Ontemprod1Changing(value);
-					this.SendPropertyChanging();
-					this._temprod1 = value;
-					this.SendPropertyChanged("temprod1");
-					this.Ontemprod1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod2", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string temprod2
-		{
-			get
-			{
-				return this._temprod2;
-			}
-			set
-			{
-				if ((this._temprod2 != value))
-				{
-					this.Ontemprod2Changing(value);
-					this.SendPropertyChanging();
-					this._temprod2 = value;
-					this.SendPropertyChanged("temprod2");
-					this.Ontemprod2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod3", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string temprod3
-		{
-			get
-			{
-				return this._temprod3;
-			}
-			set
-			{
-				if ((this._temprod3 != value))
-				{
-					this.Ontemprod3Changing(value);
-					this.SendPropertyChanging();
-					this._temprod3 = value;
-					this.SendPropertyChanged("temprod3");
-					this.Ontemprod3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod4", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string temprod4
-		{
-			get
-			{
-				return this._temprod4;
-			}
-			set
-			{
-				if ((this._temprod4 != value))
-				{
-					this.Ontemprod4Changing(value);
-					this.SendPropertyChanging();
-					this._temprod4 = value;
-					this.SendPropertyChanged("temprod4");
-					this.Ontemprod4Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod5", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string temprod5
-		{
-			get
-			{
-				return this._temprod5;
-			}
-			set
-			{
-				if ((this._temprod5 != value))
-				{
-					this.Ontemprod5Changing(value);
-					this.SendPropertyChanging();
-					this._temprod5 = value;
-					this.SendPropertyChanged("temprod5");
-					this.Ontemprod5Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod6", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string temprod6
-		{
-			get
-			{
-				return this._temprod6;
-			}
-			set
-			{
-				if ((this._temprod6 != value))
-				{
-					this.Ontemprod6Changing(value);
-					this.SendPropertyChanging();
-					this._temprod6 = value;
-					this.SendPropertyChanged("temprod6");
-					this.Ontemprod6Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_setpointfin", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string setpointfin
-		{
-			get
-			{
-				return this._setpointfin;
-			}
-			set
-			{
-				if ((this._setpointfin != value))
-				{
-					this.OnsetpointfinChanging(value);
-					this.SendPropertyChanging();
-					this._setpointfin = value;
-					this.SendPropertyChanged("setpointfin");
-					this.OnsetpointfinChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vidrayan", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string vidrayan
-		{
-			get
-			{
-				return this._vidrayan;
-			}
-			set
-			{
-				if ((this._vidrayan != value))
-				{
-					this.OnvidrayanChanging(value);
-					this.SendPropertyChanging();
-					this._vidrayan = value;
-					this.SendPropertyChanged("vidrayan");
-					this.OnvidrayanChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_termino_carga", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string termino_carga
-		{
-			get
-			{
-				return this._termino_carga;
-			}
-			set
-			{
-				if ((this._termino_carga != value))
-				{
-					this.Ontermino_cargaChanging(value);
-					this.SendPropertyChanging();
-					this._termino_carga = value;
-					this.SendPropertyChanged("termino_carga");
-					this.Ontermino_cargaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_porcentaje", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> porcentaje
-		{
-			get
-			{
-				return this._porcentaje;
-			}
-			set
-			{
-				if ((this._porcentaje != value))
-				{
-					this.OnporcentajeChanging(value);
-					this.SendPropertyChanging();
-					this._porcentaje = value;
-					this.SendPropertyChanged("porcentaje");
-					this.OnporcentajeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaini", DbType="DateTime")]
-		public System.Nullable<System.DateTime> fechaini
-		{
-			get
-			{
-				return this._fechaini;
-			}
-			set
-			{
-				if ((this._fechaini != value))
-				{
-					this.OnfechainiChanging(value);
-					this.SendPropertyChanging();
-					this._fechaini = value;
-					this.SendPropertyChanged("fechaini");
-					this.OnfechainiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conseini", DbType="Decimal(2,0)")]
-		public System.Nullable<decimal> conseini
-		{
-			get
-			{
-				return this._conseini;
-			}
-			set
-			{
-				if ((this._conseini != value))
-				{
-					this.OnconseiniChanging(value);
-					this.SendPropertyChanging();
-					this._conseini = value;
-					this.SendPropertyChanged("conseini");
-					this.OnconseiniChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_anden", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string anden
-		{
-			get
-			{
-				return this._anden;
-			}
-			set
-			{
-				if ((this._anden != value))
-				{
-					this.OnandenChanging(value);
-					this.SendPropertyChanging();
-					this._anden = value;
-					this.SendPropertyChanged("anden");
-					this.OnandenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posunodos", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posunodos
-		{
-			get
-			{
-				return this._posunodos;
-			}
-			set
-			{
-				if ((this._posunodos != value))
-				{
-					this.OnposunodosChanging(value);
-					this.SendPropertyChanging();
-					this._posunodos = value;
-					this.SendPropertyChanged("posunodos");
-					this.OnposunodosChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_postrescuatro", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string postrescuatro
-		{
-			get
-			{
-				return this._postrescuatro;
-			}
-			set
-			{
-				if ((this._postrescuatro != value))
-				{
-					this.OnpostrescuatroChanging(value);
-					this.SendPropertyChanging();
-					this._postrescuatro = value;
-					this.SendPropertyChanged("postrescuatro");
-					this.OnpostrescuatroChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_poscincoseis", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string poscincoseis
-		{
-			get
-			{
-				return this._poscincoseis;
-			}
-			set
-			{
-				if ((this._poscincoseis != value))
-				{
-					this.OnposcincoseisChanging(value);
-					this.SendPropertyChanging();
-					this._poscincoseis = value;
-					this.SendPropertyChanged("poscincoseis");
-					this.OnposcincoseisChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_possieteocho", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string possieteocho
-		{
-			get
-			{
-				return this._possieteocho;
-			}
-			set
-			{
-				if ((this._possieteocho != value))
-				{
-					this.OnpossieteochoChanging(value);
-					this.SendPropertyChanging();
-					this._possieteocho = value;
-					this.SendPropertyChanged("possieteocho");
-					this.OnpossieteochoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posnuevediez", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posnuevediez
-		{
-			get
-			{
-				return this._posnuevediez;
-			}
-			set
-			{
-				if ((this._posnuevediez != value))
-				{
-					this.OnposnuevediezChanging(value);
-					this.SendPropertyChanging();
-					this._posnuevediez = value;
-					this.SendPropertyChanged("posnuevediez");
-					this.OnposnuevediezChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posoncedoce", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posoncedoce
-		{
-			get
-			{
-				return this._posoncedoce;
-			}
-			set
-			{
-				if ((this._posoncedoce != value))
-				{
-					this.OnposoncedoceChanging(value);
-					this.SendPropertyChanging();
-					this._posoncedoce = value;
-					this.SendPropertyChanged("posoncedoce");
-					this.OnposoncedoceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_postrececatorce", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string postrececatorce
-		{
-			get
-			{
-				return this._postrececatorce;
-			}
-			set
-			{
-				if ((this._postrececatorce != value))
-				{
-					this.OnpostrececatorceChanging(value);
-					this.SendPropertyChanging();
-					this._postrececatorce = value;
-					this.SendPropertyChanged("postrececatorce");
-					this.OnpostrececatorceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posquincedieciseis", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posquincedieciseis
-		{
-			get
-			{
-				return this._posquincedieciseis;
-			}
-			set
-			{
-				if ((this._posquincedieciseis != value))
-				{
-					this.OnposquincedieciseisChanging(value);
-					this.SendPropertyChanging();
-					this._posquincedieciseis = value;
-					this.SendPropertyChanged("posquincedieciseis");
-					this.OnposquincedieciseisChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posdiecisietedieciocho", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posdiecisietedieciocho
-		{
-			get
-			{
-				return this._posdiecisietedieciocho;
-			}
-			set
-			{
-				if ((this._posdiecisietedieciocho != value))
-				{
-					this.OnposdiecisietedieciochoChanging(value);
-					this.SendPropertyChanging();
-					this._posdiecisietedieciocho = value;
-					this.SendPropertyChanged("posdiecisietedieciocho");
-					this.OnposdiecisietedieciochoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posdiecinueveveinte", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posdiecinueveveinte
-		{
-			get
-			{
-				return this._posdiecinueveveinte;
-			}
-			set
-			{
-				if ((this._posdiecinueveveinte != value))
-				{
-					this.OnposdiecinueveveinteChanging(value);
-					this.SendPropertyChanging();
-					this._posdiecinueveveinte = value;
-					this.SendPropertyChanged("posdiecinueveveinte");
-					this.OnposdiecinueveveinteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posventiunoveintidos", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posventiunoveintidos
-		{
-			get
-			{
-				return this._posventiunoveintidos;
-			}
-			set
-			{
-				if ((this._posventiunoveintidos != value))
-				{
-					this.OnposventiunoveintidosChanging(value);
-					this.SendPropertyChanging();
-					this._posventiunoveintidos = value;
-					this.SendPropertyChanged("posventiunoveintidos");
-					this.OnposventiunoveintidosChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posveintitresveinticuatro", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posveintitresveinticuatro
-		{
-			get
-			{
-				return this._posveintitresveinticuatro;
-			}
-			set
-			{
-				if ((this._posveintitresveinticuatro != value))
-				{
-					this.OnposveintitresveinticuatroChanging(value);
-					this.SendPropertyChanging();
-					this._posveintitresveinticuatro = value;
-					this.SendPropertyChanged("posveintitresveinticuatro");
-					this.OnposveintitresveinticuatroChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posveinticincoveintiseis", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posveinticincoveintiseis
-		{
-			get
-			{
-				return this._posveinticincoveintiseis;
-			}
-			set
-			{
-				if ((this._posveinticincoveintiseis != value))
-				{
-					this.OnposveinticincoveintiseisChanging(value);
-					this.SendPropertyChanging();
-					this._posveinticincoveintiseis = value;
-					this.SendPropertyChanged("posveinticincoveintiseis");
-					this.OnposveinticincoveintiseisChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posveintisieteveintiocho", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string posveintisieteveintiocho
-		{
-			get
-			{
-				return this._posveintisieteveintiocho;
-			}
-			set
-			{
-				if ((this._posveintisieteveintiocho != value))
-				{
-					this.OnposveintisieteveintiochoChanging(value);
-					this.SendPropertyChanging();
-					this._posveintisieteveintiocho = value;
-					this.SendPropertyChanged("posveintisieteveintiocho");
-					this.OnposveintisieteveintiochoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fotoryan", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string fotoryan
-		{
-			get
-			{
-				return this._fotoryan;
-			}
-			set
-			{
-				if ((this._fotoryan != value))
-				{
-					this.OnfotoryanChanging(value);
-					this.SendPropertyChanging();
-					this._fotoryan = value;
-					this.SendPropertyChanged("fotoryan");
-					this.OnfotoryanChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tb_Autoriza_OdeP")]
-	public partial class Tb_Autoriza_OdeP
-	{
-		
-		private string _clave;
-		
-		private string _usuario;
-		
-		private string _password;
-		
-		private string _obs;
-		
-		private string _passwordlineal;
-		
-		private string _Opcion;
-		
-		public Tb_Autoriza_OdeP()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_clave", DbType="Char(5)")]
-		public string clave
-		{
-			get
-			{
-				return this._clave;
-			}
-			set
-			{
-				if ((this._clave != value))
-				{
-					this._clave = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usuario", DbType="Char(10)")]
-		public string usuario
-		{
-			get
-			{
-				return this._usuario;
-			}
-			set
-			{
-				if ((this._usuario != value))
-				{
-					this._usuario = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="Char(20)")]
-		public string password
-		{
-			get
-			{
-				return this._password;
-			}
-			set
-			{
-				if ((this._password != value))
-				{
-					this._password = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_obs", DbType="Char(50)")]
-		public string obs
-		{
-			get
-			{
-				return this._obs;
-			}
-			set
-			{
-				if ((this._obs != value))
-				{
-					this._obs = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordlineal", DbType="Char(10)")]
-		public string passwordlineal
-		{
-			get
-			{
-				return this._passwordlineal;
-			}
-			set
-			{
-				if ((this._passwordlineal != value))
-				{
-					this._passwordlineal = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Opcion", DbType="VarChar(10)")]
-		public string Opcion
-		{
-			get
-			{
-				return this._Opcion;
-			}
-			set
-			{
-				if ((this._Opcion != value))
-				{
-					this._Opcion = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_registro_vertrai")]
-	public partial class tb_registro_vertrai : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.DateTime _fecha;
-		
-		private string _nom_compu;
-		
-		private string _nom_usu;
-		
-		private string _tipo_mov;
-		
-		private string _op_clave;
-		
-		private string _folio;
-		
-		private string _detalle;
-		
-		private string _sistema;
-		
-		private string _mov_folio;
-		
-		private int _id;
-		
-		private string _infoVideo;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnfechaChanging(System.DateTime value);
-    partial void OnfechaChanged();
-    partial void Onnom_compuChanging(string value);
-    partial void Onnom_compuChanged();
-    partial void Onnom_usuChanging(string value);
-    partial void Onnom_usuChanged();
-    partial void Ontipo_movChanging(string value);
-    partial void Ontipo_movChanged();
-    partial void Onop_claveChanging(string value);
-    partial void Onop_claveChanged();
-    partial void OnfolioChanging(string value);
-    partial void OnfolioChanged();
-    partial void OndetalleChanging(string value);
-    partial void OndetalleChanged();
-    partial void OnsistemaChanging(string value);
-    partial void OnsistemaChanged();
-    partial void Onmov_folioChanging(string value);
-    partial void Onmov_folioChanged();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OninfoVideoChanging(string value);
-    partial void OninfoVideoChanged();
-    #endregion
-		
-		public tb_registro_vertrai()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="DateTime NOT NULL")]
-		public System.DateTime fecha
-		{
-			get
-			{
-				return this._fecha;
-			}
-			set
-			{
-				if ((this._fecha != value))
-				{
-					this.OnfechaChanging(value);
-					this.SendPropertyChanging();
-					this._fecha = value;
-					this.SendPropertyChanged("fecha");
-					this.OnfechaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nom_compu", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string nom_compu
-		{
-			get
-			{
-				return this._nom_compu;
-			}
-			set
-			{
-				if ((this._nom_compu != value))
-				{
-					this.Onnom_compuChanging(value);
-					this.SendPropertyChanging();
-					this._nom_compu = value;
-					this.SendPropertyChanged("nom_compu");
-					this.Onnom_compuChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nom_usu", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string nom_usu
-		{
-			get
-			{
-				return this._nom_usu;
-			}
-			set
-			{
-				if ((this._nom_usu != value))
-				{
-					this.Onnom_usuChanging(value);
-					this.SendPropertyChanging();
-					this._nom_usu = value;
-					this.SendPropertyChanged("nom_usu");
-					this.Onnom_usuChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tipo_mov", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string tipo_mov
-		{
-			get
-			{
-				return this._tipo_mov;
-			}
-			set
-			{
-				if ((this._tipo_mov != value))
-				{
-					this.Ontipo_movChanging(value);
-					this.SendPropertyChanging();
-					this._tipo_mov = value;
-					this.SendPropertyChanged("tipo_mov");
-					this.Ontipo_movChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_op_clave", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string op_clave
-		{
-			get
-			{
-				return this._op_clave;
-			}
-			set
-			{
-				if ((this._op_clave != value))
-				{
-					this.Onop_claveChanging(value);
-					this.SendPropertyChanging();
-					this._op_clave = value;
-					this.SendPropertyChanged("op_clave");
-					this.Onop_claveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_folio", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string folio
-		{
-			get
-			{
-				return this._folio;
-			}
-			set
-			{
-				if ((this._folio != value))
-				{
-					this.OnfolioChanging(value);
-					this.SendPropertyChanging();
-					this._folio = value;
-					this.SendPropertyChanged("folio");
-					this.OnfolioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_detalle", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string detalle
-		{
-			get
-			{
-				return this._detalle;
-			}
-			set
-			{
-				if ((this._detalle != value))
-				{
-					this.OndetalleChanging(value);
-					this.SendPropertyChanging();
-					this._detalle = value;
-					this.SendPropertyChanged("detalle");
-					this.OndetalleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sistema", DbType="VarChar(10)")]
-		public string sistema
-		{
-			get
-			{
-				return this._sistema;
-			}
-			set
-			{
-				if ((this._sistema != value))
-				{
-					this.OnsistemaChanging(value);
-					this.SendPropertyChanging();
-					this._sistema = value;
-					this.SendPropertyChanged("sistema");
-					this.OnsistemaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mov_folio", DbType="VarChar(200)")]
-		public string mov_folio
-		{
-			get
-			{
-				return this._mov_folio;
-			}
-			set
-			{
-				if ((this._mov_folio != value))
-				{
-					this.Onmov_folioChanging(value);
-					this.SendPropertyChanging();
-					this._mov_folio = value;
-					this.SendPropertyChanged("mov_folio");
-					this.Onmov_folioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_infoVideo", DbType="VarChar(600)")]
-		public string infoVideo
-		{
-			get
-			{
-				return this._infoVideo;
-			}
-			set
-			{
-				if ((this._infoVideo != value))
-				{
-					this.OninfoVideoChanging(value);
-					this.SendPropertyChanging();
-					this._infoVideo = value;
-					this.SendPropertyChanged("infoVideo");
-					this.OninfoVideoChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_cat_usuarios")]
-	public partial class tb_cat_usuarios : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _usu_login;
-		
-		private string _grp_clave;
-		
-		private string _usu_password;
-		
-		private string _usu_nombre;
-		
-		private string _usu_departamento;
-		
-		private string _usu_puesto;
-		
-		private string _usu_email;
-		
-		private string _usu_pass;
-		
-		private System.Nullable<char> _usu_tipo_nomina;
-		
-		private string _usu_UERP;
-		
-		private string _estatus;
-		
-		private string _prov_clave;
-		
-		private string _usu_Extension;
-		
-		private string _usu_Celular;
-		
-		private System.Nullable<char> _usu_permisoprecio;
-		
-		private System.Nullable<bool> _Usu_SupervisorManto;
-		
-		private System.Nullable<int> _nomina;
-		
-		private System.Nullable<bool> _CambiosOrdenes;
-		
-		private int _id;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onusu_loginChanging(string value);
-    partial void Onusu_loginChanged();
-    partial void Ongrp_claveChanging(string value);
-    partial void Ongrp_claveChanged();
-    partial void Onusu_passwordChanging(string value);
-    partial void Onusu_passwordChanged();
-    partial void Onusu_nombreChanging(string value);
-    partial void Onusu_nombreChanged();
-    partial void Onusu_departamentoChanging(string value);
-    partial void Onusu_departamentoChanged();
-    partial void Onusu_puestoChanging(string value);
-    partial void Onusu_puestoChanged();
-    partial void Onusu_emailChanging(string value);
-    partial void Onusu_emailChanged();
-    partial void Onusu_passChanging(string value);
-    partial void Onusu_passChanged();
-    partial void Onusu_tipo_nominaChanging(System.Nullable<char> value);
-    partial void Onusu_tipo_nominaChanged();
-    partial void Onusu_UERPChanging(string value);
-    partial void Onusu_UERPChanged();
-    partial void OnestatusChanging(string value);
-    partial void OnestatusChanged();
-    partial void Onprov_claveChanging(string value);
-    partial void Onprov_claveChanged();
-    partial void Onusu_ExtensionChanging(string value);
-    partial void Onusu_ExtensionChanged();
-    partial void Onusu_CelularChanging(string value);
-    partial void Onusu_CelularChanged();
-    partial void Onusu_permisoprecioChanging(System.Nullable<char> value);
-    partial void Onusu_permisoprecioChanged();
-    partial void OnUsu_SupervisorMantoChanging(System.Nullable<bool> value);
-    partial void OnUsu_SupervisorMantoChanged();
-    partial void OnnominaChanging(System.Nullable<int> value);
-    partial void OnnominaChanged();
-    partial void OnCambiosOrdenesChanging(System.Nullable<bool> value);
-    partial void OnCambiosOrdenesChanged();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    #endregion
-		
-		public tb_cat_usuarios()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_login", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string usu_login
-		{
-			get
-			{
-				return this._usu_login;
-			}
-			set
-			{
-				if ((this._usu_login != value))
-				{
-					this.Onusu_loginChanging(value);
-					this.SendPropertyChanging();
-					this._usu_login = value;
-					this.SendPropertyChanged("usu_login");
-					this.Onusu_loginChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_grp_clave", DbType="Char(5) NOT NULL", CanBeNull=false)]
-		public string grp_clave
-		{
-			get
-			{
-				return this._grp_clave;
-			}
-			set
-			{
-				if ((this._grp_clave != value))
-				{
-					this.Ongrp_claveChanging(value);
-					this.SendPropertyChanging();
-					this._grp_clave = value;
-					this.SendPropertyChanged("grp_clave");
-					this.Ongrp_claveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_password", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string usu_password
-		{
-			get
-			{
-				return this._usu_password;
-			}
-			set
-			{
-				if ((this._usu_password != value))
-				{
-					this.Onusu_passwordChanging(value);
-					this.SendPropertyChanging();
-					this._usu_password = value;
-					this.SendPropertyChanged("usu_password");
-					this.Onusu_passwordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_nombre", DbType="Char(40)")]
-		public string usu_nombre
-		{
-			get
-			{
-				return this._usu_nombre;
-			}
-			set
-			{
-				if ((this._usu_nombre != value))
-				{
-					this.Onusu_nombreChanging(value);
-					this.SendPropertyChanging();
-					this._usu_nombre = value;
-					this.SendPropertyChanged("usu_nombre");
-					this.Onusu_nombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_departamento", DbType="Char(30)")]
-		public string usu_departamento
-		{
-			get
-			{
-				return this._usu_departamento;
-			}
-			set
-			{
-				if ((this._usu_departamento != value))
-				{
-					this.Onusu_departamentoChanging(value);
-					this.SendPropertyChanging();
-					this._usu_departamento = value;
-					this.SendPropertyChanged("usu_departamento");
-					this.Onusu_departamentoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_puesto", DbType="Char(30)")]
-		public string usu_puesto
-		{
-			get
-			{
-				return this._usu_puesto;
-			}
-			set
-			{
-				if ((this._usu_puesto != value))
-				{
-					this.Onusu_puestoChanging(value);
-					this.SendPropertyChanging();
-					this._usu_puesto = value;
-					this.SendPropertyChanged("usu_puesto");
-					this.Onusu_puestoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_email", DbType="Char(80)")]
-		public string usu_email
-		{
-			get
-			{
-				return this._usu_email;
-			}
-			set
-			{
-				if ((this._usu_email != value))
-				{
-					this.Onusu_emailChanging(value);
-					this.SendPropertyChanging();
-					this._usu_email = value;
-					this.SendPropertyChanged("usu_email");
-					this.Onusu_emailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_pass", DbType="Char(20)")]
-		public string usu_pass
-		{
-			get
-			{
-				return this._usu_pass;
-			}
-			set
-			{
-				if ((this._usu_pass != value))
-				{
-					this.Onusu_passChanging(value);
-					this.SendPropertyChanging();
-					this._usu_pass = value;
-					this.SendPropertyChanged("usu_pass");
-					this.Onusu_passChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_tipo_nomina", DbType="NChar(1)")]
-		public System.Nullable<char> usu_tipo_nomina
-		{
-			get
-			{
-				return this._usu_tipo_nomina;
-			}
-			set
-			{
-				if ((this._usu_tipo_nomina != value))
-				{
-					this.Onusu_tipo_nominaChanging(value);
-					this.SendPropertyChanging();
-					this._usu_tipo_nomina = value;
-					this.SendPropertyChanged("usu_tipo_nomina");
-					this.Onusu_tipo_nominaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_UERP", DbType="NChar(10)")]
-		public string usu_UERP
-		{
-			get
-			{
-				return this._usu_UERP;
-			}
-			set
-			{
-				if ((this._usu_UERP != value))
-				{
-					this.Onusu_UERPChanging(value);
-					this.SendPropertyChanging();
-					this._usu_UERP = value;
-					this.SendPropertyChanged("usu_UERP");
-					this.Onusu_UERPChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estatus", DbType="VarChar(1)")]
-		public string estatus
-		{
-			get
-			{
-				return this._estatus;
-			}
-			set
-			{
-				if ((this._estatus != value))
-				{
-					this.OnestatusChanging(value);
-					this.SendPropertyChanging();
-					this._estatus = value;
-					this.SendPropertyChanged("estatus");
-					this.OnestatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_prov_clave", DbType="VarChar(10)")]
-		public string prov_clave
-		{
-			get
-			{
-				return this._prov_clave;
-			}
-			set
-			{
-				if ((this._prov_clave != value))
-				{
-					this.Onprov_claveChanging(value);
-					this.SendPropertyChanging();
-					this._prov_clave = value;
-					this.SendPropertyChanged("prov_clave");
-					this.Onprov_claveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Extension", DbType="Char(3)")]
-		public string usu_Extension
-		{
-			get
-			{
-				return this._usu_Extension;
-			}
-			set
-			{
-				if ((this._usu_Extension != value))
-				{
-					this.Onusu_ExtensionChanging(value);
-					this.SendPropertyChanging();
-					this._usu_Extension = value;
-					this.SendPropertyChanged("usu_Extension");
-					this.Onusu_ExtensionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Celular", DbType="Char(10)")]
-		public string usu_Celular
-		{
-			get
-			{
-				return this._usu_Celular;
-			}
-			set
-			{
-				if ((this._usu_Celular != value))
-				{
-					this.Onusu_CelularChanging(value);
-					this.SendPropertyChanging();
-					this._usu_Celular = value;
-					this.SendPropertyChanged("usu_Celular");
-					this.Onusu_CelularChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_permisoprecio", DbType="Char(1)")]
-		public System.Nullable<char> usu_permisoprecio
-		{
-			get
-			{
-				return this._usu_permisoprecio;
-			}
-			set
-			{
-				if ((this._usu_permisoprecio != value))
-				{
-					this.Onusu_permisoprecioChanging(value);
-					this.SendPropertyChanging();
-					this._usu_permisoprecio = value;
-					this.SendPropertyChanged("usu_permisoprecio");
-					this.Onusu_permisoprecioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usu_SupervisorManto", DbType="Bit")]
-		public System.Nullable<bool> Usu_SupervisorManto
-		{
-			get
-			{
-				return this._Usu_SupervisorManto;
-			}
-			set
-			{
-				if ((this._Usu_SupervisorManto != value))
-				{
-					this.OnUsu_SupervisorMantoChanging(value);
-					this.SendPropertyChanging();
-					this._Usu_SupervisorManto = value;
-					this.SendPropertyChanged("Usu_SupervisorManto");
-					this.OnUsu_SupervisorMantoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomina", DbType="Int")]
-		public System.Nullable<int> nomina
-		{
-			get
-			{
-				return this._nomina;
-			}
-			set
-			{
-				if ((this._nomina != value))
-				{
-					this.OnnominaChanging(value);
-					this.SendPropertyChanging();
-					this._nomina = value;
-					this.SendPropertyChanged("nomina");
-					this.OnnominaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CambiosOrdenes", DbType="Bit")]
-		public System.Nullable<bool> CambiosOrdenes
-		{
-			get
-			{
-				return this._CambiosOrdenes;
-			}
-			set
-			{
-				if ((this._CambiosOrdenes != value))
-				{
-					this.OnCambiosOrdenesChanging(value);
-					this.SendPropertyChanging();
-					this._CambiosOrdenes = value;
-					this.SendPropertyChanged("CambiosOrdenes");
-					this.OnCambiosOrdenesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		public System.Data.Linq.Table<Tb_Autoriza_OdeP> Tb_Autoriza_OdeP
 		{
 			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
 			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<Tb_Autoriza_OdeP>();
 			}
 		}
 	}
@@ -3119,6 +1304,1821 @@ namespace Datos
 				if ((this._horafinTEMP != value))
 				{
 					this._horafinTEMP = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_det_revision_trailer")]
+	public partial class tb_det_revision_trailer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.DateTime _fecha;
+		
+		private decimal _conse;
+		
+		private string _responsable_captu;
+		
+		private string _setpointini;
+		
+		private string _numcaja;
+		
+		private string _difusor;
+		
+		private string _piso;
+		
+		private string _cajacompleta;
+		
+		private string _temprod1;
+		
+		private string _temprod2;
+		
+		private string _temprod3;
+		
+		private string _temprod4;
+		
+		private string _temprod5;
+		
+		private string _temprod6;
+		
+		private string _setpointfin;
+		
+		private string _vidrayan;
+		
+		private string _termino_carga;
+		
+		private System.Nullable<decimal> _porcentaje;
+		
+		private System.Nullable<System.DateTime> _fechaini;
+		
+		private System.Nullable<decimal> _conseini;
+		
+		private string _anden;
+		
+		private string _posunodos;
+		
+		private string _postrescuatro;
+		
+		private string _poscincoseis;
+		
+		private string _possieteocho;
+		
+		private string _posnuevediez;
+		
+		private string _posoncedoce;
+		
+		private string _postrececatorce;
+		
+		private string _posquincedieciseis;
+		
+		private string _posdiecisietedieciocho;
+		
+		private string _posdiecinueveveinte;
+		
+		private string _posventiunoveintidos;
+		
+		private string _posveintitresveinticuatro;
+		
+		private string _posveinticincoveintiseis;
+		
+		private string _posveintisieteveintiocho;
+		
+		private string _fotoryan;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfechaChanging(System.DateTime value);
+    partial void OnfechaChanged();
+    partial void OnconseChanging(decimal value);
+    partial void OnconseChanged();
+    partial void Onresponsable_captuChanging(string value);
+    partial void Onresponsable_captuChanged();
+    partial void OnsetpointiniChanging(string value);
+    partial void OnsetpointiniChanged();
+    partial void OnnumcajaChanging(string value);
+    partial void OnnumcajaChanged();
+    partial void OndifusorChanging(string value);
+    partial void OndifusorChanged();
+    partial void OnpisoChanging(string value);
+    partial void OnpisoChanged();
+    partial void OncajacompletaChanging(string value);
+    partial void OncajacompletaChanged();
+    partial void Ontemprod1Changing(string value);
+    partial void Ontemprod1Changed();
+    partial void Ontemprod2Changing(string value);
+    partial void Ontemprod2Changed();
+    partial void Ontemprod3Changing(string value);
+    partial void Ontemprod3Changed();
+    partial void Ontemprod4Changing(string value);
+    partial void Ontemprod4Changed();
+    partial void Ontemprod5Changing(string value);
+    partial void Ontemprod5Changed();
+    partial void Ontemprod6Changing(string value);
+    partial void Ontemprod6Changed();
+    partial void OnsetpointfinChanging(string value);
+    partial void OnsetpointfinChanged();
+    partial void OnvidrayanChanging(string value);
+    partial void OnvidrayanChanged();
+    partial void Ontermino_cargaChanging(string value);
+    partial void Ontermino_cargaChanged();
+    partial void OnporcentajeChanging(System.Nullable<decimal> value);
+    partial void OnporcentajeChanged();
+    partial void OnfechainiChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechainiChanged();
+    partial void OnconseiniChanging(System.Nullable<decimal> value);
+    partial void OnconseiniChanged();
+    partial void OnandenChanging(string value);
+    partial void OnandenChanged();
+    partial void OnposunodosChanging(string value);
+    partial void OnposunodosChanged();
+    partial void OnpostrescuatroChanging(string value);
+    partial void OnpostrescuatroChanged();
+    partial void OnposcincoseisChanging(string value);
+    partial void OnposcincoseisChanged();
+    partial void OnpossieteochoChanging(string value);
+    partial void OnpossieteochoChanged();
+    partial void OnposnuevediezChanging(string value);
+    partial void OnposnuevediezChanged();
+    partial void OnposoncedoceChanging(string value);
+    partial void OnposoncedoceChanged();
+    partial void OnpostrececatorceChanging(string value);
+    partial void OnpostrececatorceChanged();
+    partial void OnposquincedieciseisChanging(string value);
+    partial void OnposquincedieciseisChanged();
+    partial void OnposdiecisietedieciochoChanging(string value);
+    partial void OnposdiecisietedieciochoChanged();
+    partial void OnposdiecinueveveinteChanging(string value);
+    partial void OnposdiecinueveveinteChanged();
+    partial void OnposventiunoveintidosChanging(string value);
+    partial void OnposventiunoveintidosChanged();
+    partial void OnposveintitresveinticuatroChanging(string value);
+    partial void OnposveintitresveinticuatroChanged();
+    partial void OnposveinticincoveintiseisChanging(string value);
+    partial void OnposveinticincoveintiseisChanged();
+    partial void OnposveintisieteveintiochoChanging(string value);
+    partial void OnposveintisieteveintiochoChanged();
+    partial void OnfotoryanChanging(string value);
+    partial void OnfotoryanChanged();
+    #endregion
+		
+		public tb_det_revision_trailer()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="DateTime NOT NULL", IsPrimaryKey=true)]
+		public System.DateTime fecha
+		{
+			get
+			{
+				return this._fecha;
+			}
+			set
+			{
+				if ((this._fecha != value))
+				{
+					this.OnfechaChanging(value);
+					this.SendPropertyChanging();
+					this._fecha = value;
+					this.SendPropertyChanged("fecha");
+					this.OnfechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conse", DbType="Decimal(2,0) NOT NULL", IsPrimaryKey=true)]
+		public decimal conse
+		{
+			get
+			{
+				return this._conse;
+			}
+			set
+			{
+				if ((this._conse != value))
+				{
+					this.OnconseChanging(value);
+					this.SendPropertyChanging();
+					this._conse = value;
+					this.SendPropertyChanged("conse");
+					this.OnconseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_responsable_captu", DbType="VarChar(50)")]
+		public string responsable_captu
+		{
+			get
+			{
+				return this._responsable_captu;
+			}
+			set
+			{
+				if ((this._responsable_captu != value))
+				{
+					this.Onresponsable_captuChanging(value);
+					this.SendPropertyChanging();
+					this._responsable_captu = value;
+					this.SendPropertyChanged("responsable_captu");
+					this.Onresponsable_captuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_setpointini", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string setpointini
+		{
+			get
+			{
+				return this._setpointini;
+			}
+			set
+			{
+				if ((this._setpointini != value))
+				{
+					this.OnsetpointiniChanging(value);
+					this.SendPropertyChanging();
+					this._setpointini = value;
+					this.SendPropertyChanged("setpointini");
+					this.OnsetpointiniChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numcaja", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string numcaja
+		{
+			get
+			{
+				return this._numcaja;
+			}
+			set
+			{
+				if ((this._numcaja != value))
+				{
+					this.OnnumcajaChanging(value);
+					this.SendPropertyChanging();
+					this._numcaja = value;
+					this.SendPropertyChanged("numcaja");
+					this.OnnumcajaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_difusor", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string difusor
+		{
+			get
+			{
+				return this._difusor;
+			}
+			set
+			{
+				if ((this._difusor != value))
+				{
+					this.OndifusorChanging(value);
+					this.SendPropertyChanging();
+					this._difusor = value;
+					this.SendPropertyChanged("difusor");
+					this.OndifusorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_piso", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string piso
+		{
+			get
+			{
+				return this._piso;
+			}
+			set
+			{
+				if ((this._piso != value))
+				{
+					this.OnpisoChanging(value);
+					this.SendPropertyChanging();
+					this._piso = value;
+					this.SendPropertyChanged("piso");
+					this.OnpisoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cajacompleta", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string cajacompleta
+		{
+			get
+			{
+				return this._cajacompleta;
+			}
+			set
+			{
+				if ((this._cajacompleta != value))
+				{
+					this.OncajacompletaChanging(value);
+					this.SendPropertyChanging();
+					this._cajacompleta = value;
+					this.SendPropertyChanged("cajacompleta");
+					this.OncajacompletaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod1", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string temprod1
+		{
+			get
+			{
+				return this._temprod1;
+			}
+			set
+			{
+				if ((this._temprod1 != value))
+				{
+					this.Ontemprod1Changing(value);
+					this.SendPropertyChanging();
+					this._temprod1 = value;
+					this.SendPropertyChanged("temprod1");
+					this.Ontemprod1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod2", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string temprod2
+		{
+			get
+			{
+				return this._temprod2;
+			}
+			set
+			{
+				if ((this._temprod2 != value))
+				{
+					this.Ontemprod2Changing(value);
+					this.SendPropertyChanging();
+					this._temprod2 = value;
+					this.SendPropertyChanged("temprod2");
+					this.Ontemprod2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod3", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string temprod3
+		{
+			get
+			{
+				return this._temprod3;
+			}
+			set
+			{
+				if ((this._temprod3 != value))
+				{
+					this.Ontemprod3Changing(value);
+					this.SendPropertyChanging();
+					this._temprod3 = value;
+					this.SendPropertyChanged("temprod3");
+					this.Ontemprod3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod4", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string temprod4
+		{
+			get
+			{
+				return this._temprod4;
+			}
+			set
+			{
+				if ((this._temprod4 != value))
+				{
+					this.Ontemprod4Changing(value);
+					this.SendPropertyChanging();
+					this._temprod4 = value;
+					this.SendPropertyChanged("temprod4");
+					this.Ontemprod4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod5", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string temprod5
+		{
+			get
+			{
+				return this._temprod5;
+			}
+			set
+			{
+				if ((this._temprod5 != value))
+				{
+					this.Ontemprod5Changing(value);
+					this.SendPropertyChanging();
+					this._temprod5 = value;
+					this.SendPropertyChanged("temprod5");
+					this.Ontemprod5Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_temprod6", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string temprod6
+		{
+			get
+			{
+				return this._temprod6;
+			}
+			set
+			{
+				if ((this._temprod6 != value))
+				{
+					this.Ontemprod6Changing(value);
+					this.SendPropertyChanging();
+					this._temprod6 = value;
+					this.SendPropertyChanged("temprod6");
+					this.Ontemprod6Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_setpointfin", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string setpointfin
+		{
+			get
+			{
+				return this._setpointfin;
+			}
+			set
+			{
+				if ((this._setpointfin != value))
+				{
+					this.OnsetpointfinChanging(value);
+					this.SendPropertyChanging();
+					this._setpointfin = value;
+					this.SendPropertyChanged("setpointfin");
+					this.OnsetpointfinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vidrayan", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string vidrayan
+		{
+			get
+			{
+				return this._vidrayan;
+			}
+			set
+			{
+				if ((this._vidrayan != value))
+				{
+					this.OnvidrayanChanging(value);
+					this.SendPropertyChanging();
+					this._vidrayan = value;
+					this.SendPropertyChanged("vidrayan");
+					this.OnvidrayanChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_termino_carga", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string termino_carga
+		{
+			get
+			{
+				return this._termino_carga;
+			}
+			set
+			{
+				if ((this._termino_carga != value))
+				{
+					this.Ontermino_cargaChanging(value);
+					this.SendPropertyChanging();
+					this._termino_carga = value;
+					this.SendPropertyChanged("termino_carga");
+					this.Ontermino_cargaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_porcentaje", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> porcentaje
+		{
+			get
+			{
+				return this._porcentaje;
+			}
+			set
+			{
+				if ((this._porcentaje != value))
+				{
+					this.OnporcentajeChanging(value);
+					this.SendPropertyChanging();
+					this._porcentaje = value;
+					this.SendPropertyChanged("porcentaje");
+					this.OnporcentajeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaini", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fechaini
+		{
+			get
+			{
+				return this._fechaini;
+			}
+			set
+			{
+				if ((this._fechaini != value))
+				{
+					this.OnfechainiChanging(value);
+					this.SendPropertyChanging();
+					this._fechaini = value;
+					this.SendPropertyChanged("fechaini");
+					this.OnfechainiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conseini", DbType="Decimal(2,0)")]
+		public System.Nullable<decimal> conseini
+		{
+			get
+			{
+				return this._conseini;
+			}
+			set
+			{
+				if ((this._conseini != value))
+				{
+					this.OnconseiniChanging(value);
+					this.SendPropertyChanging();
+					this._conseini = value;
+					this.SendPropertyChanged("conseini");
+					this.OnconseiniChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_anden", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string anden
+		{
+			get
+			{
+				return this._anden;
+			}
+			set
+			{
+				if ((this._anden != value))
+				{
+					this.OnandenChanging(value);
+					this.SendPropertyChanging();
+					this._anden = value;
+					this.SendPropertyChanged("anden");
+					this.OnandenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posunodos", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posunodos
+		{
+			get
+			{
+				return this._posunodos;
+			}
+			set
+			{
+				if ((this._posunodos != value))
+				{
+					this.OnposunodosChanging(value);
+					this.SendPropertyChanging();
+					this._posunodos = value;
+					this.SendPropertyChanged("posunodos");
+					this.OnposunodosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_postrescuatro", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string postrescuatro
+		{
+			get
+			{
+				return this._postrescuatro;
+			}
+			set
+			{
+				if ((this._postrescuatro != value))
+				{
+					this.OnpostrescuatroChanging(value);
+					this.SendPropertyChanging();
+					this._postrescuatro = value;
+					this.SendPropertyChanged("postrescuatro");
+					this.OnpostrescuatroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_poscincoseis", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string poscincoseis
+		{
+			get
+			{
+				return this._poscincoseis;
+			}
+			set
+			{
+				if ((this._poscincoseis != value))
+				{
+					this.OnposcincoseisChanging(value);
+					this.SendPropertyChanging();
+					this._poscincoseis = value;
+					this.SendPropertyChanged("poscincoseis");
+					this.OnposcincoseisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_possieteocho", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string possieteocho
+		{
+			get
+			{
+				return this._possieteocho;
+			}
+			set
+			{
+				if ((this._possieteocho != value))
+				{
+					this.OnpossieteochoChanging(value);
+					this.SendPropertyChanging();
+					this._possieteocho = value;
+					this.SendPropertyChanged("possieteocho");
+					this.OnpossieteochoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posnuevediez", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posnuevediez
+		{
+			get
+			{
+				return this._posnuevediez;
+			}
+			set
+			{
+				if ((this._posnuevediez != value))
+				{
+					this.OnposnuevediezChanging(value);
+					this.SendPropertyChanging();
+					this._posnuevediez = value;
+					this.SendPropertyChanged("posnuevediez");
+					this.OnposnuevediezChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posoncedoce", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posoncedoce
+		{
+			get
+			{
+				return this._posoncedoce;
+			}
+			set
+			{
+				if ((this._posoncedoce != value))
+				{
+					this.OnposoncedoceChanging(value);
+					this.SendPropertyChanging();
+					this._posoncedoce = value;
+					this.SendPropertyChanged("posoncedoce");
+					this.OnposoncedoceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_postrececatorce", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string postrececatorce
+		{
+			get
+			{
+				return this._postrececatorce;
+			}
+			set
+			{
+				if ((this._postrececatorce != value))
+				{
+					this.OnpostrececatorceChanging(value);
+					this.SendPropertyChanging();
+					this._postrececatorce = value;
+					this.SendPropertyChanged("postrececatorce");
+					this.OnpostrececatorceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posquincedieciseis", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posquincedieciseis
+		{
+			get
+			{
+				return this._posquincedieciseis;
+			}
+			set
+			{
+				if ((this._posquincedieciseis != value))
+				{
+					this.OnposquincedieciseisChanging(value);
+					this.SendPropertyChanging();
+					this._posquincedieciseis = value;
+					this.SendPropertyChanged("posquincedieciseis");
+					this.OnposquincedieciseisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posdiecisietedieciocho", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posdiecisietedieciocho
+		{
+			get
+			{
+				return this._posdiecisietedieciocho;
+			}
+			set
+			{
+				if ((this._posdiecisietedieciocho != value))
+				{
+					this.OnposdiecisietedieciochoChanging(value);
+					this.SendPropertyChanging();
+					this._posdiecisietedieciocho = value;
+					this.SendPropertyChanged("posdiecisietedieciocho");
+					this.OnposdiecisietedieciochoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posdiecinueveveinte", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posdiecinueveveinte
+		{
+			get
+			{
+				return this._posdiecinueveveinte;
+			}
+			set
+			{
+				if ((this._posdiecinueveveinte != value))
+				{
+					this.OnposdiecinueveveinteChanging(value);
+					this.SendPropertyChanging();
+					this._posdiecinueveveinte = value;
+					this.SendPropertyChanged("posdiecinueveveinte");
+					this.OnposdiecinueveveinteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posventiunoveintidos", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posventiunoveintidos
+		{
+			get
+			{
+				return this._posventiunoveintidos;
+			}
+			set
+			{
+				if ((this._posventiunoveintidos != value))
+				{
+					this.OnposventiunoveintidosChanging(value);
+					this.SendPropertyChanging();
+					this._posventiunoveintidos = value;
+					this.SendPropertyChanged("posventiunoveintidos");
+					this.OnposventiunoveintidosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posveintitresveinticuatro", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posveintitresveinticuatro
+		{
+			get
+			{
+				return this._posveintitresveinticuatro;
+			}
+			set
+			{
+				if ((this._posveintitresveinticuatro != value))
+				{
+					this.OnposveintitresveinticuatroChanging(value);
+					this.SendPropertyChanging();
+					this._posveintitresveinticuatro = value;
+					this.SendPropertyChanged("posveintitresveinticuatro");
+					this.OnposveintitresveinticuatroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posveinticincoveintiseis", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posveinticincoveintiseis
+		{
+			get
+			{
+				return this._posveinticincoveintiseis;
+			}
+			set
+			{
+				if ((this._posveinticincoveintiseis != value))
+				{
+					this.OnposveinticincoveintiseisChanging(value);
+					this.SendPropertyChanging();
+					this._posveinticincoveintiseis = value;
+					this.SendPropertyChanged("posveinticincoveintiseis");
+					this.OnposveinticincoveintiseisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_posveintisieteveintiocho", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string posveintisieteveintiocho
+		{
+			get
+			{
+				return this._posveintisieteveintiocho;
+			}
+			set
+			{
+				if ((this._posveintisieteveintiocho != value))
+				{
+					this.OnposveintisieteveintiochoChanging(value);
+					this.SendPropertyChanging();
+					this._posveintisieteveintiocho = value;
+					this.SendPropertyChanged("posveintisieteveintiocho");
+					this.OnposveintisieteveintiochoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fotoryan", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string fotoryan
+		{
+			get
+			{
+				return this._fotoryan;
+			}
+			set
+			{
+				if ((this._fotoryan != value))
+				{
+					this.OnfotoryanChanging(value);
+					this.SendPropertyChanging();
+					this._fotoryan = value;
+					this.SendPropertyChanged("fotoryan");
+					this.OnfotoryanChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_cat_usuarios")]
+	public partial class tb_cat_usuarios : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _usu_login;
+		
+		private string _grp_clave;
+		
+		private string _usu_password;
+		
+		private string _usu_nombre;
+		
+		private string _usu_departamento;
+		
+		private string _usu_puesto;
+		
+		private string _usu_email;
+		
+		private string _usu_pass;
+		
+		private System.Nullable<char> _usu_tipo_nomina;
+		
+		private string _usu_UERP;
+		
+		private string _estatus;
+		
+		private string _prov_clave;
+		
+		private string _usu_Extension;
+		
+		private string _usu_Celular;
+		
+		private System.Nullable<char> _usu_permisoprecio;
+		
+		private System.Nullable<bool> _Usu_SupervisorManto;
+		
+		private System.Nullable<int> _nomina;
+		
+		private System.Nullable<bool> _CambiosOrdenes;
+		
+		private int _id;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onusu_loginChanging(string value);
+    partial void Onusu_loginChanged();
+    partial void Ongrp_claveChanging(string value);
+    partial void Ongrp_claveChanged();
+    partial void Onusu_passwordChanging(string value);
+    partial void Onusu_passwordChanged();
+    partial void Onusu_nombreChanging(string value);
+    partial void Onusu_nombreChanged();
+    partial void Onusu_departamentoChanging(string value);
+    partial void Onusu_departamentoChanged();
+    partial void Onusu_puestoChanging(string value);
+    partial void Onusu_puestoChanged();
+    partial void Onusu_emailChanging(string value);
+    partial void Onusu_emailChanged();
+    partial void Onusu_passChanging(string value);
+    partial void Onusu_passChanged();
+    partial void Onusu_tipo_nominaChanging(System.Nullable<char> value);
+    partial void Onusu_tipo_nominaChanged();
+    partial void Onusu_UERPChanging(string value);
+    partial void Onusu_UERPChanged();
+    partial void OnestatusChanging(string value);
+    partial void OnestatusChanged();
+    partial void Onprov_claveChanging(string value);
+    partial void Onprov_claveChanged();
+    partial void Onusu_ExtensionChanging(string value);
+    partial void Onusu_ExtensionChanged();
+    partial void Onusu_CelularChanging(string value);
+    partial void Onusu_CelularChanged();
+    partial void Onusu_permisoprecioChanging(System.Nullable<char> value);
+    partial void Onusu_permisoprecioChanged();
+    partial void OnUsu_SupervisorMantoChanging(System.Nullable<bool> value);
+    partial void OnUsu_SupervisorMantoChanged();
+    partial void OnnominaChanging(System.Nullable<int> value);
+    partial void OnnominaChanged();
+    partial void OnCambiosOrdenesChanging(System.Nullable<bool> value);
+    partial void OnCambiosOrdenesChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    #endregion
+		
+		public tb_cat_usuarios()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_login", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string usu_login
+		{
+			get
+			{
+				return this._usu_login;
+			}
+			set
+			{
+				if ((this._usu_login != value))
+				{
+					this.Onusu_loginChanging(value);
+					this.SendPropertyChanging();
+					this._usu_login = value;
+					this.SendPropertyChanged("usu_login");
+					this.Onusu_loginChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_grp_clave", DbType="Char(5) NOT NULL", CanBeNull=false)]
+		public string grp_clave
+		{
+			get
+			{
+				return this._grp_clave;
+			}
+			set
+			{
+				if ((this._grp_clave != value))
+				{
+					this.Ongrp_claveChanging(value);
+					this.SendPropertyChanging();
+					this._grp_clave = value;
+					this.SendPropertyChanged("grp_clave");
+					this.Ongrp_claveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_password", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string usu_password
+		{
+			get
+			{
+				return this._usu_password;
+			}
+			set
+			{
+				if ((this._usu_password != value))
+				{
+					this.Onusu_passwordChanging(value);
+					this.SendPropertyChanging();
+					this._usu_password = value;
+					this.SendPropertyChanged("usu_password");
+					this.Onusu_passwordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_nombre", DbType="Char(40)")]
+		public string usu_nombre
+		{
+			get
+			{
+				return this._usu_nombre;
+			}
+			set
+			{
+				if ((this._usu_nombre != value))
+				{
+					this.Onusu_nombreChanging(value);
+					this.SendPropertyChanging();
+					this._usu_nombre = value;
+					this.SendPropertyChanged("usu_nombre");
+					this.Onusu_nombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_departamento", DbType="Char(30)")]
+		public string usu_departamento
+		{
+			get
+			{
+				return this._usu_departamento;
+			}
+			set
+			{
+				if ((this._usu_departamento != value))
+				{
+					this.Onusu_departamentoChanging(value);
+					this.SendPropertyChanging();
+					this._usu_departamento = value;
+					this.SendPropertyChanged("usu_departamento");
+					this.Onusu_departamentoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_puesto", DbType="Char(30)")]
+		public string usu_puesto
+		{
+			get
+			{
+				return this._usu_puesto;
+			}
+			set
+			{
+				if ((this._usu_puesto != value))
+				{
+					this.Onusu_puestoChanging(value);
+					this.SendPropertyChanging();
+					this._usu_puesto = value;
+					this.SendPropertyChanged("usu_puesto");
+					this.Onusu_puestoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_email", DbType="Char(80)")]
+		public string usu_email
+		{
+			get
+			{
+				return this._usu_email;
+			}
+			set
+			{
+				if ((this._usu_email != value))
+				{
+					this.Onusu_emailChanging(value);
+					this.SendPropertyChanging();
+					this._usu_email = value;
+					this.SendPropertyChanged("usu_email");
+					this.Onusu_emailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_pass", DbType="Char(20)")]
+		public string usu_pass
+		{
+			get
+			{
+				return this._usu_pass;
+			}
+			set
+			{
+				if ((this._usu_pass != value))
+				{
+					this.Onusu_passChanging(value);
+					this.SendPropertyChanging();
+					this._usu_pass = value;
+					this.SendPropertyChanged("usu_pass");
+					this.Onusu_passChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_tipo_nomina", DbType="NChar(1)")]
+		public System.Nullable<char> usu_tipo_nomina
+		{
+			get
+			{
+				return this._usu_tipo_nomina;
+			}
+			set
+			{
+				if ((this._usu_tipo_nomina != value))
+				{
+					this.Onusu_tipo_nominaChanging(value);
+					this.SendPropertyChanging();
+					this._usu_tipo_nomina = value;
+					this.SendPropertyChanged("usu_tipo_nomina");
+					this.Onusu_tipo_nominaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_UERP", DbType="NChar(10)")]
+		public string usu_UERP
+		{
+			get
+			{
+				return this._usu_UERP;
+			}
+			set
+			{
+				if ((this._usu_UERP != value))
+				{
+					this.Onusu_UERPChanging(value);
+					this.SendPropertyChanging();
+					this._usu_UERP = value;
+					this.SendPropertyChanged("usu_UERP");
+					this.Onusu_UERPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estatus", DbType="VarChar(1)")]
+		public string estatus
+		{
+			get
+			{
+				return this._estatus;
+			}
+			set
+			{
+				if ((this._estatus != value))
+				{
+					this.OnestatusChanging(value);
+					this.SendPropertyChanging();
+					this._estatus = value;
+					this.SendPropertyChanged("estatus");
+					this.OnestatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_prov_clave", DbType="VarChar(10)")]
+		public string prov_clave
+		{
+			get
+			{
+				return this._prov_clave;
+			}
+			set
+			{
+				if ((this._prov_clave != value))
+				{
+					this.Onprov_claveChanging(value);
+					this.SendPropertyChanging();
+					this._prov_clave = value;
+					this.SendPropertyChanged("prov_clave");
+					this.Onprov_claveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Extension", DbType="Char(3)")]
+		public string usu_Extension
+		{
+			get
+			{
+				return this._usu_Extension;
+			}
+			set
+			{
+				if ((this._usu_Extension != value))
+				{
+					this.Onusu_ExtensionChanging(value);
+					this.SendPropertyChanging();
+					this._usu_Extension = value;
+					this.SendPropertyChanged("usu_Extension");
+					this.Onusu_ExtensionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Celular", DbType="Char(10)")]
+		public string usu_Celular
+		{
+			get
+			{
+				return this._usu_Celular;
+			}
+			set
+			{
+				if ((this._usu_Celular != value))
+				{
+					this.Onusu_CelularChanging(value);
+					this.SendPropertyChanging();
+					this._usu_Celular = value;
+					this.SendPropertyChanged("usu_Celular");
+					this.Onusu_CelularChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_permisoprecio", DbType="Char(1)")]
+		public System.Nullable<char> usu_permisoprecio
+		{
+			get
+			{
+				return this._usu_permisoprecio;
+			}
+			set
+			{
+				if ((this._usu_permisoprecio != value))
+				{
+					this.Onusu_permisoprecioChanging(value);
+					this.SendPropertyChanging();
+					this._usu_permisoprecio = value;
+					this.SendPropertyChanged("usu_permisoprecio");
+					this.Onusu_permisoprecioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usu_SupervisorManto", DbType="Bit")]
+		public System.Nullable<bool> Usu_SupervisorManto
+		{
+			get
+			{
+				return this._Usu_SupervisorManto;
+			}
+			set
+			{
+				if ((this._Usu_SupervisorManto != value))
+				{
+					this.OnUsu_SupervisorMantoChanging(value);
+					this.SendPropertyChanging();
+					this._Usu_SupervisorManto = value;
+					this.SendPropertyChanged("Usu_SupervisorManto");
+					this.OnUsu_SupervisorMantoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nomina", DbType="Int")]
+		public System.Nullable<int> nomina
+		{
+			get
+			{
+				return this._nomina;
+			}
+			set
+			{
+				if ((this._nomina != value))
+				{
+					this.OnnominaChanging(value);
+					this.SendPropertyChanging();
+					this._nomina = value;
+					this.SendPropertyChanged("nomina");
+					this.OnnominaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CambiosOrdenes", DbType="Bit")]
+		public System.Nullable<bool> CambiosOrdenes
+		{
+			get
+			{
+				return this._CambiosOrdenes;
+			}
+			set
+			{
+				if ((this._CambiosOrdenes != value))
+				{
+					this.OnCambiosOrdenesChanging(value);
+					this.SendPropertyChanging();
+					this._CambiosOrdenes = value;
+					this.SendPropertyChanged("CambiosOrdenes");
+					this.OnCambiosOrdenesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_registro_vertrai")]
+	public partial class tb_registro_vertrai : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.DateTime _fecha;
+		
+		private string _nom_compu;
+		
+		private string _nom_usu;
+		
+		private string _tipo_mov;
+		
+		private string _op_clave;
+		
+		private string _folio;
+		
+		private string _detalle;
+		
+		private string _sistema;
+		
+		private string _mov_folio;
+		
+		private int _id;
+		
+		private string _infoVideo;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnfechaChanging(System.DateTime value);
+    partial void OnfechaChanged();
+    partial void Onnom_compuChanging(string value);
+    partial void Onnom_compuChanged();
+    partial void Onnom_usuChanging(string value);
+    partial void Onnom_usuChanged();
+    partial void Ontipo_movChanging(string value);
+    partial void Ontipo_movChanged();
+    partial void Onop_claveChanging(string value);
+    partial void Onop_claveChanged();
+    partial void OnfolioChanging(string value);
+    partial void OnfolioChanged();
+    partial void OndetalleChanging(string value);
+    partial void OndetalleChanged();
+    partial void OnsistemaChanging(string value);
+    partial void OnsistemaChanged();
+    partial void Onmov_folioChanging(string value);
+    partial void Onmov_folioChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OninfoVideoChanging(string value);
+    partial void OninfoVideoChanged();
+    #endregion
+		
+		public tb_registro_vertrai()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="DateTime NOT NULL")]
+		public System.DateTime fecha
+		{
+			get
+			{
+				return this._fecha;
+			}
+			set
+			{
+				if ((this._fecha != value))
+				{
+					this.OnfechaChanging(value);
+					this.SendPropertyChanging();
+					this._fecha = value;
+					this.SendPropertyChanged("fecha");
+					this.OnfechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nom_compu", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string nom_compu
+		{
+			get
+			{
+				return this._nom_compu;
+			}
+			set
+			{
+				if ((this._nom_compu != value))
+				{
+					this.Onnom_compuChanging(value);
+					this.SendPropertyChanging();
+					this._nom_compu = value;
+					this.SendPropertyChanged("nom_compu");
+					this.Onnom_compuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nom_usu", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string nom_usu
+		{
+			get
+			{
+				return this._nom_usu;
+			}
+			set
+			{
+				if ((this._nom_usu != value))
+				{
+					this.Onnom_usuChanging(value);
+					this.SendPropertyChanging();
+					this._nom_usu = value;
+					this.SendPropertyChanged("nom_usu");
+					this.Onnom_usuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tipo_mov", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string tipo_mov
+		{
+			get
+			{
+				return this._tipo_mov;
+			}
+			set
+			{
+				if ((this._tipo_mov != value))
+				{
+					this.Ontipo_movChanging(value);
+					this.SendPropertyChanging();
+					this._tipo_mov = value;
+					this.SendPropertyChanged("tipo_mov");
+					this.Ontipo_movChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_op_clave", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string op_clave
+		{
+			get
+			{
+				return this._op_clave;
+			}
+			set
+			{
+				if ((this._op_clave != value))
+				{
+					this.Onop_claveChanging(value);
+					this.SendPropertyChanging();
+					this._op_clave = value;
+					this.SendPropertyChanged("op_clave");
+					this.Onop_claveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_folio", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string folio
+		{
+			get
+			{
+				return this._folio;
+			}
+			set
+			{
+				if ((this._folio != value))
+				{
+					this.OnfolioChanging(value);
+					this.SendPropertyChanging();
+					this._folio = value;
+					this.SendPropertyChanged("folio");
+					this.OnfolioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_detalle", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string detalle
+		{
+			get
+			{
+				return this._detalle;
+			}
+			set
+			{
+				if ((this._detalle != value))
+				{
+					this.OndetalleChanging(value);
+					this.SendPropertyChanging();
+					this._detalle = value;
+					this.SendPropertyChanged("detalle");
+					this.OndetalleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sistema", DbType="VarChar(10)")]
+		public string sistema
+		{
+			get
+			{
+				return this._sistema;
+			}
+			set
+			{
+				if ((this._sistema != value))
+				{
+					this.OnsistemaChanging(value);
+					this.SendPropertyChanging();
+					this._sistema = value;
+					this.SendPropertyChanged("sistema");
+					this.OnsistemaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mov_folio", DbType="VarChar(200)")]
+		public string mov_folio
+		{
+			get
+			{
+				return this._mov_folio;
+			}
+			set
+			{
+				if ((this._mov_folio != value))
+				{
+					this.Onmov_folioChanging(value);
+					this.SendPropertyChanging();
+					this._mov_folio = value;
+					this.SendPropertyChanged("mov_folio");
+					this.Onmov_folioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_infoVideo", DbType="VarChar(600)")]
+		public string infoVideo
+		{
+			get
+			{
+				return this._infoVideo;
+			}
+			set
+			{
+				if ((this._infoVideo != value))
+				{
+					this.OninfoVideoChanging(value);
+					this.SendPropertyChanging();
+					this._infoVideo = value;
+					this.SendPropertyChanged("infoVideo");
+					this.OninfoVideoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tb_Autoriza_OdeP")]
+	public partial class Tb_Autoriza_OdeP
+	{
+		
+		private string _clave;
+		
+		private string _usuario;
+		
+		private string _password;
+		
+		private string _obs;
+		
+		private string _passwordlineal;
+		
+		private string _Opcion;
+		
+		public Tb_Autoriza_OdeP()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_clave", DbType="Char(5)")]
+		public string clave
+		{
+			get
+			{
+				return this._clave;
+			}
+			set
+			{
+				if ((this._clave != value))
+				{
+					this._clave = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usuario", DbType="Char(10)")]
+		public string usuario
+		{
+			get
+			{
+				return this._usuario;
+			}
+			set
+			{
+				if ((this._usuario != value))
+				{
+					this._usuario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="Char(20)")]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this._password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_obs", DbType="Char(50)")]
+		public string obs
+		{
+			get
+			{
+				return this._obs;
+			}
+			set
+			{
+				if ((this._obs != value))
+				{
+					this._obs = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordlineal", DbType="Char(10)")]
+		public string passwordlineal
+		{
+			get
+			{
+				return this._passwordlineal;
+			}
+			set
+			{
+				if ((this._passwordlineal != value))
+				{
+					this._passwordlineal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Opcion", DbType="VarChar(10)")]
+		public string Opcion
+		{
+			get
+			{
+				return this._Opcion;
+			}
+			set
+			{
+				if ((this._Opcion != value))
+				{
+					this._Opcion = value;
 				}
 			}
 		}

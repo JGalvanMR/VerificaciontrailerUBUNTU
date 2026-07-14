@@ -99,5 +99,17 @@ namespace Datos.Properties {
                 return ((string)(this["GAB_IrapuatoConnectionString3"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=tcp:192.168.123.6,1433;Initial Catalog=GAB_Irapuato;Persist Security " +
+            "Info=True;User ID=sa;Password=Gabira2026$;Encrypt=False;TrustServerCertificate=T" +
+            "rue")]
+        public string GAB_IrapuatoConnectionString4 {
+            get {
+                return ((string)(this["GAB_IrapuatoConnectionString4"]));
+            }
+        }
     }
 }

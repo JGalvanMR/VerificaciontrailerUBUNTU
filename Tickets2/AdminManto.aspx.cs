@@ -151,7 +151,8 @@ namespace Tickets2
                                foto11 = x.temprod6 == null ? "no.png" : x.temprod6.ToString(),
                                foto12 = x.setpointfin == null ? "no.png" : x.setpointfin.ToString(),
                                foto13 = x.termino_carga == null ? "no.png" : x.termino_carga.ToString(),
-                               foto14 = x.vidrayan == null ? "no.png" : x.vidrayan.ToString(),
+                               foto14 = x.fotoryan == null ? "no.png" : x.fotoryan.ToString(),
+                               foto15 = x.vidrayan == null ? "no.png" : x.vidrayan.ToString(),
 
                                fecha = u.fecha
                            };
