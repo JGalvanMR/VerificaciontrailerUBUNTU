@@ -73,17 +73,31 @@
                                 <div class="clearfix">
                                     <div class="pull-left">
                                         <div class="row">
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-3">
                                                 <label for="form-field-8">Fecha Inicial</label>
-                                                <asp:TextBox runat="server" ID="fechainicial" CssClass="form-control date-picker" data-date-format="dd/mm/yyyy" placeholder="Id del Servicio"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="fechainicial" CssClass="form-control date-picker"
+                                                    data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy"></asp:TextBox>
                                             </div>
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-3">
                                                 <label for="form-field-9">Fecha Final</label>
-                                                <asp:TextBox runat="server" ID="fechafinal" CssClass="form-control date-picker" data-date-format="dd/mm/yyyy" placeholder="Placas"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="fechafinal" CssClass="form-control date-picker"
+                                                    data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy"></asp:TextBox>
                                             </div>
                                             <div class="col-sm-2">
-                                                <label for="form-field-9"></label>
-                                                <asp:LinkButton ID="btnFiltrar" runat="server" CssClass="btn btn-info btn-block" Text="<i class='fab fa-searchengin'></i>"
+                                                <label for="form-field-10">Orden de Venta</label>
+                                                <asp:TextBox runat="server" ID="txtOrdenVenta" CssClass="form-control"
+                                                    placeholder="Orden de Venta"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="form-field-11">Factura</label>
+                                                <asp:TextBox runat="server" ID="txtFactura" CssClass="form-control"
+                                                    placeholder="Factura"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>&nbsp;</label>
+                                                <asp:LinkButton ID="btnFiltrar" runat="server"
+                                                    CssClass="btn btn-info btn-block"
+                                                    Text="<i class='fab fa-searchengin'></i>"
                                                     OnClick="btnFiltrar_Click" />
                                             </div>
                                         </div>

@@ -66,8 +66,221 @@ namespace Tickets2
                 Response.Redirect("PaginaLogin.aspx");
             }
         }
+        private void CargarGridTrailers(string inicio, string final, string factura = "")
+        {
+            if (string.IsNullOrEmpty(inicio) || inicio.Trim() == "" ||
+                string.IsNullOrEmpty(final) || final.Trim() == "")
+            {
+                MessageBoxError.Show("Las fechas inicial y final son obligatorias.");
+                return;
+            }
 
-        private void CargarGridTrailers(string inicio, string final)
+            DateTime fechaInicio;
+            DateTime fechaFinal;
+
+            if (!DateTime.TryParseExact(inicio, "dd/MM/yyyy",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicio))
+            {
+                MessageBoxError.Show("Formato inválido en fecha inicial.");
+                return;
+            }
+
+            if (!DateTime.TryParseExact(final, "dd/MM/yyyy",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinal))
+            {
+                MessageBoxError.Show("Formato inválido en fecha final.");
+                return;
+            }
+
+            if (fechaInicio > fechaFinal)
+            {
+                MessageBoxError.Show("La fecha inicial no puede ser mayor a la fecha final.");
+                return;
+            }
+
+            // Normalizamos el texto de la factura para la comparación
+            string facturaFiltro = (factura ?? "").Trim();
+
+            var consulta = from u in Dataver.tb_mstr_trailer
+                           join p in Dataver.tb_det_revision_trailer
+                           on new { u.conse, u.fecha } equals
+                           new { conse = p.conseini, fecha = p.fechaini } into sr
+                           from x in sr.DefaultIfEmpty()
+
+                           where u.fecha >= fechaInicio
+                                 && u.fecha <= fechaFinal
+                                 && u.HoraEnt != ""
+                                 && u.conse != 0
+
+                           orderby u.conse ascending
+
+                           select new
+                           {
+                               conse = u.conse,
+                               HoraEnt = u.HoraEnt,
+                               chofer = u.chofer,
+                               no_trailer = u.no_trailer,
+                               destino = u.destino,
+                               turno = u.turno,
+                               responsable = u.responsable,
+                               anden = u.anden,
+                               pdn_folio = u.pdn_folio,
+
+                               // ⚠️ AJUSTA AQUÍ el nombre real del campo factura en tb_mstr_trailer
+                               factura = u.factura,
+
+                               porcentaje = x.porcentaje == null ? "0" : x.porcentaje.ToString(),
+                               captura = x.responsable_captu,
+
+                               foto1 = x.setpointini == null ? "no.png" : x.setpointini.ToString(),
+                               foto2 = x.numcaja == null ? "no.png" : x.numcaja.ToString(),
+                               foto3 = x.difusor == null ? "no.png" : x.difusor.ToString(),
+                               foto4 = x.piso == null ? "no.png" : x.piso.ToString(),
+                               foto5 = x.cajacompleta == null ? "no.png" : x.cajacompleta.ToString(),
+                               foto6 = x.temprod1 == null ? "no.png" : x.temprod1.ToString(),
+                               foto7 = x.temprod2 == null ? "no.png" : x.temprod2.ToString(),
+                               foto8 = x.temprod3 == null ? "no.png" : x.temprod3.ToString(),
+                               foto9 = x.temprod4 == null ? "no.png" : x.temprod4.ToString(),
+                               foto10 = x.temprod5 == null ? "no.png" : x.temprod5.ToString(),
+                               foto11 = x.temprod6 == null ? "no.png" : x.temprod6.ToString(),
+                               foto12 = x.setpointfin == null ? "no.png" : x.setpointfin.ToString(),
+                               foto13 = x.termino_carga == null ? "no.png" : x.termino_carga.ToString(),
+                               foto14 = x.fotoryan == null ? "no.png" : x.fotoryan.ToString(),
+                               foto15 = x.vidrayan == null ? "no.png" : x.vidrayan.ToString(),
+
+                               fecha = u.fecha
+                           };
+
+            // Filtro por factura (opcional)
+            if (!string.IsNullOrEmpty(facturaFiltro))
+            {
+                consulta = consulta.Where(x => x.factura != null
+                                            && x.factura.Trim() == facturaFiltro);
+            }
+
+            if (objAdmin.usu_departamento.ToString().Trim() == "CEDIS CANCUN")
+            {
+                consulta = consulta.Where(x => x.destino == "CANCUN");
+            }
+            else if (objAdmin.usu_departamento.ToString().Trim() == "TRANSPORTES GAB")
+            {
+                consulta = consulta.Where(x => x.no_trailer != null);
+            }
+
+            Session["fotos"] = consulta;
+
+            string html = "";
+
+            int cien = 0;
+            int total = consulta.Count();
+
+            if (total > 0)
+            {
+                html += "<tr><td>";
+                html += "<table id='dynamic-table' class='table table-striped table-bordered table-hover'>";
+                html += "<thead>";
+                html += "<tr>";
+                html += "<th>#</th>";
+                html += "<th>Hora Entrada</th>";
+                html += "<th>Fecha</th>";
+                html += "<th>Placa</th>";
+                html += "<th>Chofer</th>";
+                html += "<th>Destino</th>";
+                html += "<th>Turno</th>";
+                html += "<th>Captura</th>";
+                html += "<th>Responsable</th>";
+                html += "<th>Anden</th>";
+                html += "<th>Pedido</th>";
+                html += "<th>Factura</th>";   // ← NUEVA COLUMNA
+                html += "<th>Avance</th>";
+                html += "<th></th>";
+                html += "</tr>";
+                html += "</thead>";
+                html += "<tbody>";
+
+                foreach (var i in consulta)
+                {
+                    decimal porcentaje = 0;
+                    decimal.TryParse(i.porcentaje, out porcentaje);
+                    porcentaje = Math.Round(porcentaje, 0);
+
+                    DateTime fechaTemp = Convert.ToDateTime(i.fecha);
+                    string fechaFormateada = fechaTemp.ToString("dd/MM/yyyy");
+                    string fechaId = fechaTemp.ToString("ddMMyyyy");
+
+                    html += "<tr>";
+                    html += "<td>" + i.conse + "</td>";
+                    html += "<td>" + i.HoraEnt + "</td>";
+                    html += "<td>" + fechaFormateada + "</td>";
+                    html += "<td>" + i.no_trailer + "</td>";
+                    html += "<td>" + i.chofer + "</td>";
+                    html += "<td>" + i.destino + "</td>";
+                    html += "<td>" + i.turno + "</td>";
+                    html += "<td>" + i.captura + "</td>";
+                    html += "<td>" + i.responsable + "</td>";
+                    html += "<td>" + i.anden + "</td>";
+                    html += "<td>" + i.pdn_folio + "</td>";
+                    html += "<td>" + (i.factura ?? "") + "</td>";   // ← NUEVA CELDA
+
+                    html += "<td>";
+                    html += "<div class='pull-left easy-pie-chart percentage' " +
+                            "data-size='30' " +
+                            "data-color='#ED174F' " +
+                            "data-percent='" + porcentaje + "'>";
+                    html += "<span class='percent'><font size='2'>" + porcentaje + "</font></span>%";
+                    html += "</div>";
+                    html += "</td>";
+
+                    if (porcentaje == 100) cien++;
+
+                    if (porcentaje != 0)
+                    {
+                        html += "<td><div class='action-buttons'>";
+                        html += "<a id='" + fechaId + "_" + i.conse + "_lnkView' class='btn btn-success btn-xs'>";
+                        html += "<i id='" + fechaId + "_" + i.conse + "_lnkView' class='ace-icon fas fa-images bigger-110 icon-only'></i>";
+                        html += "</a>";
+                        html += "<a id='" + fechaId + "_" + i.conse + "_download' class='btn btn-danger btn-xs'>";
+                        html += "<i id='" + fechaId + "_" + i.conse + "_download' class='ace-icon fas fa-download bigger-110 icon-only'></i>";
+                        html += "</a>";
+                        html += "</div></td>";
+                    }
+                    else
+                    {
+                        html += "<td><div class='action-buttons'>";
+                        html += "<a class='btn disabled btn-success btn-xs'>";
+                        html += "<i class='ace-icon fas fa-images bigger-110 icon-only'></i>";
+                        html += "</a>";
+                        html += "<a class='btn disabled btn-danger btn-xs'>";
+                        html += "<i class='ace-icon fas fa-download bigger-110 icon-only'></i>";
+                        html += "</a>";
+                        html += "</div></td>";
+                    }
+
+                    html += "</tr>";
+                }
+
+                html += "</tbody>";
+                html += "</table>";
+            }
+            else
+            {
+                html += "<table>";
+                html += "<tr><td class='FieldCaption' colspan='3'>Sin registros encontrados</td></tr>";
+                html += "</table>";
+            }
+
+            Literal1.Text = html;
+
+            if (cien == 0)
+            {
+                Literal2.Text = cien + " de " + total + " - 0%";
+            }
+            else
+            {
+                Literal2.Text = cien + " de " + total + " - " + ((cien * 100) / total) + "%";
+            }
+        }
+        private void CargarGridTrailersOG(string inicio, string final)
         {
             if (string.IsNullOrEmpty(inicio) || inicio.Trim() == "" ||
                 string.IsNullOrEmpty(final) || final.Trim() == "")

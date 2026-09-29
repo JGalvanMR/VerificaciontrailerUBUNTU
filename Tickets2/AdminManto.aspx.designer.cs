@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Tickets2 {
-    
-    
-    public partial class AdminManto {
-        
+namespace Tickets2
+{
+
+
+    public partial class AdminManto
+    {
+
         /// <summary>
         /// Control btnSalir.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Tickets2 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSalir;
-        
+
         /// <summary>
         /// Control fechainicial.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Tickets2 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox fechainicial;
-        
+
         /// <summary>
         /// Control fechafinal.
         /// </summary>
@@ -38,7 +40,25 @@ namespace Tickets2 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox fechafinal;
-        
+
+        /// <summary>
+        /// Control txtOrdenVenta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOrdenVenta;
+
+        /// <summary>
+        /// Control txtFactura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFactura;
+
         /// <summary>
         /// Control btnFiltrar.
         /// </summary>
@@ -47,7 +67,7 @@ namespace Tickets2 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnFiltrar;
-        
+
         /// <summary>
         /// Control Literal2.
         /// </summary>
@@ -56,7 +76,7 @@ namespace Tickets2 {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal Literal2;
-        
+
         /// <summary>
         /// Control Literal1.
         /// </summary>
