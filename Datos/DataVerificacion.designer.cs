@@ -42,7 +42,7 @@ namespace Datos
     #endregion
 		
 		public DataVerificacionDataContext() : 
-				base(global::Datos.Properties.Settings.Default.GAB_IrapuatoConnectionString4, mappingSource)
+				base(global::Datos.Properties.Settings.Default.GAB_IrapuatoConnectionString5, mappingSource)
 		{
 			OnCreated();
 		}

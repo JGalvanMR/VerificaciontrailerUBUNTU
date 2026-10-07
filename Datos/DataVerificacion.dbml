@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GAB_Irapuato" Class="DataVerificacionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:192.168.123.6,1433;Initial Catalog=GAB_Irapuato;Persist Security Info=True;User ID=sa;Encrypt=False;Trust Server Certificate=True" SettingsObjectName="Datos.Properties.Settings" SettingsPropertyName="GAB_IrapuatoConnectionString4" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:189.206.160.206,2352;Initial Catalog=GAB_Irapuato;Persist Security Info=True;User ID=sa;Encrypt=False;Trust Server Certificate=True" SettingsObjectName="Datos.Properties.Settings" SettingsPropertyName="GAB_IrapuatoConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tb_mstr_trailer" Member="tb_mstr_trailer">
     <Type Name="tb_mstr_trailer">
       <Column Name="fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
