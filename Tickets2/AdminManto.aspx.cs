@@ -1,5 +1,7 @@
 ﻿using Datos;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Web.UI;
@@ -66,49 +68,54 @@ namespace Tickets2
                 Response.Redirect("PaginaLogin.aspx");
             }
         }
-        private void CargarGridTrailers(string inicio, string final, string factura = "")
+        private void CargarGridTrailers(string inicio, string final, string ordenVenta = "", string factura = "", string lugar = "")
         {
-            if (string.IsNullOrEmpty(inicio) || inicio.Trim() == "" ||
-                string.IsNullOrEmpty(final) || final.Trim() == "")
-            {
-                MessageBoxError.Show("Las fechas inicial y final son obligatorias.");
-                return;
-            }
-
-            DateTime fechaInicio;
-            DateTime fechaFinal;
-
-            if (!DateTime.TryParseExact(inicio, "dd/MM/yyyy",
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicio))
-            {
-                MessageBoxError.Show("Formato inválido en fecha inicial.");
-                return;
-            }
-
-            if (!DateTime.TryParseExact(final, "dd/MM/yyyy",
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinal))
-            {
-                MessageBoxError.Show("Formato inválido en fecha final.");
-                return;
-            }
-
-            if (fechaInicio > fechaFinal)
-            {
-                MessageBoxError.Show("La fecha inicial no puede ser mayor a la fecha final.");
-                return;
-            }
-
-            // Normalizamos el texto de la factura para la comparación
+            string ordenFiltro = (ordenVenta ?? "").Trim();
             string facturaFiltro = (factura ?? "").Trim();
 
+            // Con Orden de Venta o Factura se busca el documento sin importar la fecha
+            bool porDocumento = ordenFiltro != "" || facturaFiltro != "";
+
+            DateTime fechaInicio = DateTime.MinValue;
+            DateTime fechaFinal = DateTime.MaxValue;
+
+            if (!porDocumento)
+            {
+                if (string.IsNullOrEmpty(inicio) || inicio.Trim() == "" ||
+                    string.IsNullOrEmpty(final) || final.Trim() == "")
+                {
+                    MessageBoxError.Show("Las fechas inicial y final son obligatorias.");
+                    return;
+                }
+
+                if (!DateTime.TryParseExact(inicio, "dd/MM/yyyy",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicio))
+                {
+                    MessageBoxError.Show("Formato inválido en fecha inicial.");
+                    return;
+                }
+
+                if (!DateTime.TryParseExact(final, "dd/MM/yyyy",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinal))
+                {
+                    MessageBoxError.Show("Formato inválido en fecha final.");
+                    return;
+                }
+
+                if (fechaInicio > fechaFinal)
+                {
+                    MessageBoxError.Show("La fecha inicial no puede ser mayor a la fecha final.");
+                    return;
+                }
+            }
             var consulta = from u in Dataver.tb_mstr_trailer
                            join p in Dataver.tb_det_revision_trailer
                            on new { u.conse, u.fecha } equals
                            new { conse = p.conseini, fecha = p.fechaini } into sr
                            from x in sr.DefaultIfEmpty()
 
-                           where u.fecha >= fechaInicio
-                                 && u.fecha <= fechaFinal
+                           where (porDocumento || (u.fecha >= fechaInicio
+                                     && u.fecha <= fechaFinal))
                                  && u.HoraEnt != ""
                                  && u.conse != 0
 
@@ -125,9 +132,7 @@ namespace Tickets2
                                responsable = u.responsable,
                                anden = u.anden,
                                pdn_folio = u.pdn_folio,
-
-                               // ⚠️ AJUSTA AQUÍ el nombre real del campo factura en tb_mstr_trailer
-                               factura = u.factura,
+                               hora_trailer = u.hora_trailer,
 
                                porcentaje = x.porcentaje == null ? "0" : x.porcentaje.ToString(),
                                captura = x.responsable_captu,
@@ -151,11 +156,22 @@ namespace Tickets2
                                fecha = u.fecha
                            };
 
-            // Filtro por factura (opcional)
+            // Filtro por Orden de Venta (pedido)
+            if (!string.IsNullOrEmpty(ordenFiltro))
+            {
+                string ordenSinCeros = ordenFiltro.TrimStart('0');
+                consulta = consulta.Where(x => x.pdn_folio != null
+                                            && (x.pdn_folio.Trim() == ordenFiltro
+                                                || x.pdn_folio.Trim() == ordenSinCeros));
+            }
+
+            // Filtro por Factura: se resuelve en tb_mstr_facturas_nal / tb_mstr_embarque
             if (!string.IsNullOrEmpty(facturaFiltro))
             {
-                consulta = consulta.Where(x => x.factura != null
-                                            && x.factura.Trim() == facturaFiltro);
+                HashSet<string> llaves = ObtenerTrailersPorFactura(facturaFiltro, lugar);
+                consulta = consulta.AsEnumerable()
+                                   .Where(x => llaves.Contains(LlaveTrailer(x.no_trailer, x.hora_trailer)))
+                                   .AsQueryable();
             }
 
             if (objAdmin.usu_departamento.ToString().Trim() == "CEDIS CANCUN")
@@ -191,7 +207,6 @@ namespace Tickets2
                 html += "<th>Responsable</th>";
                 html += "<th>Anden</th>";
                 html += "<th>Pedido</th>";
-                html += "<th>Factura</th>";   // ← NUEVA COLUMNA
                 html += "<th>Avance</th>";
                 html += "<th></th>";
                 html += "</tr>";
@@ -220,7 +235,6 @@ namespace Tickets2
                     html += "<td>" + i.responsable + "</td>";
                     html += "<td>" + i.anden + "</td>";
                     html += "<td>" + i.pdn_folio + "</td>";
-                    html += "<td>" + (i.factura ?? "") + "</td>";   // ← NUEVA CELDA
 
                     html += "<td>";
                     html += "<div class='pull-left easy-pie-chart percentage' " +
@@ -516,6 +530,66 @@ namespace Tickets2
             }
         }
 
+        // Réplica de Fn_Pedido de la aplicación de escritorio: folio de pedido de una factura EXP.
+        private string FnPedido(string factura, SqlConnection cn)
+        {
+            using (var cmd = new SqlCommand("SELECT PDN_FOLIO FROM TB_MSTR_FACTURAS_NAL WHERE FCN_FOLIO = @fac AND FCN_LUGAR = 'EXP'", cn))
+            {
+                cmd.Parameters.AddWithValue("@fac", factura);
+                return Convert.ToString(cmd.ExecuteScalar()) ?? "";
+            }
+        }
+
+        private static string LlaveTrailer(string noTrailer, string horaTrailer)
+        {
+            return (noTrailer ?? "").Trim() + "|" + (horaTrailer ?? "").Trim();
+        }
+
+        // Devuelve las llaves (no_trailer|hora_trailer) de los trailers ligados a la factura.
+        // lugar: prefijo del combo (FC, FG, FD, FM, FE, EXP).
+        private HashSet<string> ObtenerTrailersPorFactura(string factura, string lugar)
+        {
+            var llaves = new HashSet<string>();
+            string sql;
+            string pedido = null;
+
+            using (var cn = new SqlConnection(Dataver.Connection.ConnectionString))
+            {
+                cn.Open();
+
+                if (lugar == "EXP")
+                {
+                    pedido = FnPedido(factura, cn).Trim().PadLeft(6, '0');
+
+                    sql = "SELECT A.no_trailer, A.hora_trailer FROM TB_MSTR_TRAILER A, TB_MSTR_EMBARQUE B, TB_MSTR_FACTURAS_NAL C " +
+                          "WHERE C.FCN_FOLIO = @fac AND C.FCN_LUGAR = @lugar AND B.EMB_FOLIO = @pedido " +
+                          "AND B.NO_TRAILER = A.NO_TRAILER AND A.hora_trailer = B.hora_trailer";
+                }
+                else
+                {
+                    sql = "SELECT A.no_trailer, A.hora_trailer FROM TB_MSTR_TRAILER A, TB_MSTR_EMBARQUE B, TB_MSTR_FACTURAS_NAL C " +
+                          "WHERE C.FCN_FOLIO = @fac AND C.FCN_LUGAR = @lugar AND C.PDN_FOLIO = B.EMB_FOLIO " +
+                          "AND B.NO_TRAILER = A.NO_TRAILER AND A.hora_trailer = B.hora_trailer";
+                }
+
+                using (var cmd = new SqlCommand(sql, cn))
+                {
+                    cmd.Parameters.AddWithValue("@fac", factura);
+                    cmd.Parameters.AddWithValue("@lugar", lugar);
+                    if (pedido != null) cmd.Parameters.AddWithValue("@pedido", pedido);
+
+                    using (var rd = cmd.ExecuteReader())
+                    {
+                        while (rd.Read())
+                            llaves.Add(LlaveTrailer(rd.IsDBNull(0) ? null : rd.GetString(0),
+                                                    rd.IsDBNull(1) ? null : rd.GetString(1)));
+                    }
+                }
+            }
+
+            return llaves;
+        }
+
         protected void btnSalir_Click(object sender, EventArgs e)
         {
             Session.RemoveAll();
@@ -524,46 +598,31 @@ namespace Tickets2
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string inicio = fechainicial.Text.Trim();
-            string final = fechafinal.Text.Trim();
-
-            if (string.IsNullOrEmpty(inicio) || inicio.Trim() == "" ||
-                string.IsNullOrEmpty(final) || final.Trim() == "")
+            // Cada modo usa solo sus controles; los demás se ignoran
+            switch (rblModo.SelectedValue)
             {
-                MessageBoxError.Show("Las fechas inicial y final son obligatorias.");
-                return;
+                case "ORDEN":
+                    if (txtOrdenVenta.Text.Trim() == "")
+                    {
+                        MessageBoxError.Show("Captura la Orden de Venta.");
+                        return;
+                    }
+                    CargarGridTrailers("", "", txtOrdenVenta.Text.Trim());
+                    break;
+
+                case "FACTURA":
+                    if (txtFactura.Text.Trim() == "")
+                    {
+                        MessageBoxError.Show("Captura la Factura.");
+                        return;
+                    }
+                    CargarGridTrailers("", "", "", txtFactura.Text.Trim(), ddlTipoFactura.SelectedValue);
+                    break;
+
+                default:
+                    CargarGridTrailers(fechainicial.Text.Trim(), fechafinal.Text.Trim());
+                    break;
             }
-
-            DateTime fechaInicio;
-            DateTime fechaFinal;
-
-            if (!DateTime.TryParseExact(inicio,
-                                        "dd/MM/yyyy",
-                                        CultureInfo.InvariantCulture,
-                                        DateTimeStyles.None,
-                                        out fechaInicio))
-            {
-                MessageBoxError.Show("La fecha inicial no tiene un formato válido.");
-                return;
-            }
-
-            if (!DateTime.TryParseExact(final,
-                                        "dd/MM/yyyy",
-                                        CultureInfo.InvariantCulture,
-                                        DateTimeStyles.None,
-                                        out fechaFinal))
-            {
-                MessageBoxError.Show("La fecha final no tiene un formato válido.");
-                return;
-            }
-
-            if (fechaInicio > fechaFinal)
-            {
-                MessageBoxError.Show("La fecha inicial no puede ser mayor a la fecha final.");
-                return;
-            }
-
-            CargarGridTrailers(inicio, final);
         }
     }
 }
