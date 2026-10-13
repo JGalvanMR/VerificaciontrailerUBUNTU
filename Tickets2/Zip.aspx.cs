@@ -100,6 +100,7 @@ namespace Tickets2
                                        foto12 = x.setpointfin == null ? "no.png" : x.setpointfin.ToString(),
                                        foto13 = x.termino_carga == null ? "no.png" : x.termino_carga.ToString(),
                                        foto14 = x.vidrayan == null ? "no.png" : x.vidrayan.ToString(),
+                                       fotoryan = x.fotoryan == null ? "no.png" : x.fotoryan.ToString(),
 
                                        fotoanden = x.anden == null ? "no.png" : x.anden.ToString(),
 
@@ -150,6 +151,7 @@ namespace Tickets2
                             i.foto11,
                             i.foto12,
                             i.foto13,
+                            i.fotoryan,
 
                             i.fotoposicion2,
                             i.fotoposicion4,
