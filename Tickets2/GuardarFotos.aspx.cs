@@ -1051,7 +1051,7 @@ namespace Tickets2
                                     else if (campo == "FotoSetPointFin") insert.setpointfin = mes_anio + "/" + nombre_archivo;
                                     else if (campo == "FotoTerminoCarga") insert.termino_carga = mes_anio + "/" + nombre_archivo;
                                     else if (campo == "FotoAnden") insert.anden = mes_anio + "/" + nombre_archivo;
-                                    else if (campo == "FotoRyan") insert.fotoryan = nombre_archivo; // sin carpeta
+                                    else if (campo == "FotoRyan") insert.fotoryan = mes_anio + "/" + nombre_archivo; // sin carpeta
                                 }
                                 catch (Exception Ex)
                                 {
@@ -1217,7 +1217,7 @@ namespace Tickets2
                                     else if (campo == "FotoSetPointFin") actualizar.setpointfin = mes_anio + "/" + nombre_archivo;
                                     else if (campo == "FotoTerminoCarga") actualizar.termino_carga = mes_anio + "/" + nombre_archivo;
                                     else if (campo == "FotoAnden") actualizar.anden = mes_anio + "/" + nombre_archivo;
-                                    else if (campo == "FotoRyan") actualizar.fotoryan = nombre_archivo; // ¡agregado!
+                                    else if (campo == "FotoRyan") actualizar.fotoryan = mes_anio + "/" + nombre_archivo; // ¡agregado!
                                 }
                                 catch (Exception Ex)
                                 {

@@ -73,17 +73,59 @@
                                 <div class="clearfix">
                                     <div class="pull-left">
                                         <div class="row">
-                                            <div class="col-sm-5">
-                                                <label for="form-field-8">Fecha Inicial</label>
-                                                <asp:TextBox runat="server" ID="fechainicial" CssClass="form-control date-picker" data-date-format="dd/mm/yyyy" placeholder="Id del Servicio"></asp:TextBox>
+                                            <div class="col-xs-12">
+                                                <label>Buscar por:</label>
+                                                <asp:RadioButtonList runat="server" ID="rblModo" RepeatLayout="Flow" RepeatDirection="Horizontal"
+                                                    CssClass="modo-busqueda">
+                                                    <asp:ListItem Value="FECHAS" Text="Fechas&nbsp;&nbsp;&nbsp;" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Value="ORDEN" Text="Orden de Venta&nbsp;&nbsp;&nbsp;"></asp:ListItem>
+                                                    <asp:ListItem Value="FACTURA" Text="Factura"></asp:ListItem>
+                                                </asp:RadioButtonList>
                                             </div>
-                                            <div class="col-sm-5">
-                                                <label for="form-field-9">Fecha Final</label>
-                                                <asp:TextBox runat="server" ID="fechafinal" CssClass="form-control date-picker" data-date-format="dd/mm/yyyy" placeholder="Placas"></asp:TextBox>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label for="fechainicial">Fecha Inicial</label>
+                                                <div class="input-group">
+                                                    <asp:TextBox runat="server" ID="fechainicial" CssClass="form-control date-picker"
+                                                        data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" autocomplete="off"></asp:TextBox>
+                                                    <span class="input-group-addon"><i class="fa fa-calendar bigger-110"></i></span>
+                                                </div>
                                             </div>
                                             <div class="col-sm-2">
-                                                <label for="form-field-9"></label>
-                                                <asp:LinkButton ID="btnFiltrar" runat="server" CssClass="btn btn-info btn-block" Text="<i class='fab fa-searchengin'></i>"
+                                                <label for="fechafinal">Fecha Final</label>
+                                                <div class="input-group">
+                                                    <asp:TextBox runat="server" ID="fechafinal" CssClass="form-control date-picker"
+                                                        data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" autocomplete="off"></asp:TextBox>
+                                                    <span class="input-group-addon"><i class="fa fa-calendar bigger-110"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="form-field-10">Orden de Venta</label>
+                                                <asp:TextBox runat="server" ID="txtOrdenVenta" CssClass="form-control"
+                                                    placeholder="Orden de Venta"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="ddlTipoFactura">Tipo de Factura</label>
+                                                <asp:DropDownList runat="server" ID="ddlTipoFactura" CssClass="form-control">
+                                                    <asp:ListItem Value="FC" Text="FC, CANCUN"></asp:ListItem>
+                                                    <asp:ListItem Value="FG" Text="FG, GUADALAJARA"></asp:ListItem>
+                                                    <asp:ListItem Value="FD" Text="FD, DISTRITO FEDERAL"></asp:ListItem>
+                                                    <asp:ListItem Value="FM" Text="FM, CUAUTITLAN"></asp:ListItem>
+                                                    <asp:ListItem Value="FE" Text="FE, EXTERNOS ELECTRONICA"></asp:ListItem>
+                                                    <asp:ListItem Value="EXP" Text="EXP, EXPORTACION"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="form-field-11">Factura</label>
+                                                <asp:TextBox runat="server" ID="txtFactura" CssClass="form-control"
+                                                    placeholder="Factura"></asp:TextBox>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label>&nbsp;</label>
+                                                <asp:LinkButton ID="btnFiltrar" runat="server"
+                                                    CssClass="btn btn-info btn-block"
+                                                    Text="<i class='fab fa-searchengin'></i>"
                                                     OnClick="btnFiltrar_Click" />
                                             </div>
                                         </div>
@@ -285,6 +327,39 @@
             });
 
 
+            // Calendario en español; se inicializa antes que la tabla para que un error en DataTables no lo afecte
+            $.fn.datepicker.dates['es'] = {
+                days: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+                daysShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
+                daysMin: ['do', 'lu', 'ma', 'mi', 'ju', 'vi', 'sá'],
+                months: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+                monthsShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+                today: 'Hoy',
+                clear: 'Limpiar',
+                weekStart: 1
+            };
+
+            $('.date-picker').datepicker({
+                format: 'dd/mm/yyyy',
+                language: 'es',
+                autoclose: true,
+                todayHighlight: true
+            });
+
+            $('.date-picker').next('.input-group-addon').on('click', function () {
+                $(this).prev('.date-picker').datepicker('show').focus();
+            });
+
+            // Solo se habilitan los controles del modo de búsqueda elegido
+            function aplicarModo() {
+                var modo = $('.modo-busqueda input[type=radio]:checked').val() || 'FECHAS';
+                $('#<%= fechainicial.ClientID %>, #<%= fechafinal.ClientID %>').prop('disabled', modo !== 'FECHAS');
+                $('#<%= txtOrdenVenta.ClientID %>').prop('disabled', modo !== 'ORDEN');
+                $('#<%= ddlTipoFactura.ClientID %>, #<%= txtFactura.ClientID %>').prop('disabled', modo !== 'FACTURA');
+            }
+            $('.modo-busqueda input[type=radio]').on('change', aplicarModo);
+            aplicarModo();
+
             saludo();
 
 
@@ -320,13 +395,6 @@
                         }
                     });
 
-                $('.date-picker').datepicker({
-                    autoclose: true,
-                    todayHighlight: true
-                })
-                    .next().on(ace.click_event, function () {
-                        $(this).prev().focus();
-                    });
 
 
 
